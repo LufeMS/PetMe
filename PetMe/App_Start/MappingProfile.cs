@@ -12,9 +12,9 @@ namespace PetMe.App_Start
     {
         public MappingProfile()
         {
-            Mapper.CreateMap<ApplicationUser, UserViewModel>();
-            Mapper.CreateMap<UserViewModel, ApplicationUser>();
-
+            Mapper.CreateMap<ApplicationUser, UserFormViewModel>();
+            Mapper.CreateMap<UserFormViewModel, ApplicationUser>();
+            Mapper.CreateMap<Pet, Pet>();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model PetMe.ViewModels.UserViewModel
+﻿@model PetMe.ViewModels.UserFormViewModel
 @using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Index";
@@ -7,5 +7,5 @@
 
 <h2>Index</h2>
 
-<a href="@Url.Action("UserForm", "Panel", new { id = User.Identity.GetUserId()})">Minhas informações</a>
-<a href="@Url.Action("PetList", "Panel", new { id = User.Identity.GetUserId()})">Meus pets</a>
+<a href="@Url.Action("UserForm", "Panel")">Minhas informações</a>
+<a href="@Url.Action("PetList", "Pets")">Meus pets</a>

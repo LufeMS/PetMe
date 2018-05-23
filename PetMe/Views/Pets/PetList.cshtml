@@ -1,4 +1,4 @@
-﻿@model PetMe.ViewModels.PetViewModel
+﻿@model PetMe.ViewModels.PetListViewModel
 @{
     ViewBag.Title = "PetList";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,7 +6,7 @@
 
 <h2>PetList</h2>
 
-<a href="@Url.Action("PetForm", "Panel")" class="btn btn-primary">Novo Pet</a>
+<a href="@Url.Action("PetForm", "Pets")" class="btn btn-primary">Novo Pet</a>
 
 @if (!Model.Pets.Any())
 {
@@ -14,6 +14,7 @@
 }
 else
 {
+    //criar uma viewmodel para os forms PetFormViewModel
     <table>
         <thead>
             <tr>
@@ -27,7 +28,7 @@ else
             {
                 <tr>
                     <td></td>
-                    <td>@pet.Name</td>
+                    <td>@Html.ActionLink(pet.Name, "PetForm", new { id = pet.Id})</td>
                     <td>@pet.MoreDetails</td>
                 </tr>
             }

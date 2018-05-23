@@ -6,7 +6,7 @@
 
 <h2>PetForm</h2>
 
-@using (Html.BeginForm("Salvar", "Pet"))
+@using (Html.BeginForm("SalvarPet", "Pets"))
 {
     <div class="form-group">
         @Html.LabelFor(p => p.Name)
@@ -69,9 +69,41 @@
         @Html.ValidationMessageFor(p => p.MoreDetails)
     </div>
     @*@Html.AntiForgeryToken()*@
+    @Html.HiddenFor(p => p.DateOfPublication)
     @Html.HiddenFor(p => p.Id)
     @Html.HiddenFor(p => p.DonoId)
+    @Html.HiddenFor(p => p.Active)
     <button class="btn btn-primary" type="submit">Salvar</button>
+
+    @*@if(Model.Id != 0) {
+            <button id="js-delete" data-pet-id="@Model.Id" class="btn btn-secondary">Excluir</button>
+        }*@
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#pet-form").on("click", "#js-delete", function () {
+                var button = $(this);
+
+                bootbox.confirm("Deseja mesmo excluir esse pet?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/pets/" + button.attr("data-pet-id"),
+                            method: "DELETE",
+                            succes: function () {
+                                toastr.success("Rentals sucessfully recorded!");
+                            },
+                            complete: function (data) {
+                                window.location.href = "@Url.Action("PetList", "Panel")"
+                            }
+                        });
+                    }
+                })
+            });
+        });
+    </script>
 }
 
 

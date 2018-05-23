@@ -6,7 +6,7 @@ using PetMe.Models;
 
 namespace PetMe.ViewModels
 {
-    public class PetViewModel
+    public class PetListViewModel
     {
         public ApplicationUser User { get; set; }
         public List<Pet> Pets { get; set; }
