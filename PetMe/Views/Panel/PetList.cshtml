@@ -1,0 +1,36 @@
+﻿@model PetMe.ViewModels.PetViewModel
+@{
+    ViewBag.Title = "PetList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>PetList</h2>
+
+<a href="@Url.Action("PetForm", "Panel")" class="btn btn-primary">Novo Pet</a>
+
+@if (!Model.Pets.Any())
+{
+    <h1>Não existem pets cadastrados ainda</h1>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Foto</th>
+                <th>Nome</th>
+                <th>Informações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pet in Model.Pets)
+            {
+                <tr>
+                    <td></td>
+                    <td>@pet.Name</td>
+                    <td>@pet.MoreDetails</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
