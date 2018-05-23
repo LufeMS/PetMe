@@ -1,4 +1,4 @@
-﻿
+﻿@model PetMe.ViewModels.PetSearchViewModel
 @{
     ViewBag.Title = "Adotar";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,3 +6,65 @@
 
 <h2>Adotar</h2>
 
+@using (Html.BeginForm("Filter", "Pets"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Age)
+        @Html.TextBoxFor(m => m.Age)
+    </div>
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.Castrated) Castrado
+        </label>
+    </div>
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.SpecialCare) Cuidados Especiais
+        </label>
+    </div>
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.Trained) Adestrado?
+        </label>
+    </div>
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.Vacinated) Vacinado?
+        </label>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Subspecies)
+        @Html.TextBoxFor(m => m.Subspecies)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Weight)
+        @Html.TextBoxFor(m => m.Weight)
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm">Filtrar</button>
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>Foto</th>
+            <th>Nome</th>
+            <th>Informações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pet in Model.Pets)
+        {
+            <tr>
+                <td></td>
+                <td>@Html.ActionLink(pet.Name, "PetForm", new { id = pet.Id })</td>
+                <td>@pet.MoreDetails</td>
+            </tr>
+        }
+    </tbody>
+</table>
