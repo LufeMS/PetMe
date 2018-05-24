@@ -28,18 +28,18 @@ namespace PetMe.Models
 
         [Required]
         public byte AgeInMonths { get; set; }
-        
+
         [Required]
-        public int PetTypeId { get; set; }
+        public byte PetTypeId { get; set; }
         public virtual PetType PetType { get; set; }
 
         [Required]
-        public int PetBreedTypeId { get; set; }
+        public byte PetBreedTypeId { get; set; }
         public virtual PetBreedType PetBreedType { get; set; }
         public string BreedDetail { get; set; }
 
         [Required]
-        public int PetSizeId { get; set; }
+        public byte PetSizeId { get; set; }
         public virtual PetSize PetSize { get; set; }
 
         public string Color { get; set; }

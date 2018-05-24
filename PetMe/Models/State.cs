@@ -13,11 +13,13 @@ namespace PetMe.Models
         //public virutal Country Country { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string Name { get; set; }
 
         [Required]
+        [MaxLength(2)]
         public string Abbreviation { get; set; }
 
-        public int UFCode { get; set; }
+        public byte UFCode { get; set; }
     }
 }

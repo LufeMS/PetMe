@@ -68,6 +68,11 @@ namespace PetMe.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Pet> Pets { get; set; }
+        public DbSet<PetBreedType> PetBreedTypes { get; set; }
+        public DbSet<PetSize> PetSizes { get; set; }
+        public DbSet<PetType> PetTypes { get; set; }
+        public DbSet<County> Counties { get; set; }
+        public DbSet<State> States { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

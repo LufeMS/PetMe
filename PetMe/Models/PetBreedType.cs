@@ -8,9 +8,10 @@ namespace PetMe.Models
 {
     public class PetBreedType
     {
-        public int Id { get; set; }
+        public byte Id { get; set; }
 
         [Required]
+        [MaxLength(15)]
         public string Name { get; set; }
     }
 }

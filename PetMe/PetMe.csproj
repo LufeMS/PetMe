@@ -236,6 +236,30 @@
     <Compile Include="Migrations\201805222205504_petfix.Designer.cs">
       <DependentUpon>201805222205504_petfix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805242117309_PetRefactoring.cs" />
+    <Compile Include="Migrations\201805242117309_PetRefactoring.Designer.cs">
+      <DependentUpon>201805242117309_PetRefactoring.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805242302400_fkPets.cs" />
+    <Compile Include="Migrations\201805242302400_fkPets.Designer.cs">
+      <DependentUpon>201805242302400_fkPets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805242310454_AddFkToPets.cs" />
+    <Compile Include="Migrations\201805242310454_AddFkToPets.Designer.cs">
+      <DependentUpon>201805242310454_AddFkToPets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805242316599_fk.cs" />
+    <Compile Include="Migrations\201805242316599_fk.Designer.cs">
+      <DependentUpon>201805242316599_fk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805242335356_fkstate.cs" />
+    <Compile Include="Migrations\201805242335356_fkstate.Designer.cs">
+      <DependentUpon>201805242335356_fkstate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805242338239_fkstate2.cs" />
+    <Compile Include="Migrations\201805242338239_fkstate2.Designer.cs">
+      <DependentUpon>201805242338239_fkstate2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Adoption.cs" />
@@ -399,6 +423,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805222205504_petfix.resx">
       <DependentUpon>201805222205504_petfix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805242117309_PetRefactoring.resx">
+      <DependentUpon>201805242117309_PetRefactoring.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805242302400_fkPets.resx">
+      <DependentUpon>201805242302400_fkPets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805242310454_AddFkToPets.resx">
+      <DependentUpon>201805242310454_AddFkToPets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805242316599_fk.resx">
+      <DependentUpon>201805242316599_fk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805242335356_fkstate.resx">
+      <DependentUpon>201805242335356_fkstate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805242338239_fkstate2.resx">
+      <DependentUpon>201805242338239_fkstate2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
