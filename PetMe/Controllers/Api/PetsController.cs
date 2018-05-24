@@ -58,7 +58,7 @@ namespace PetMe.Controllers.Api
             }
 
             pet.Active = true;
-            pet.DateOfPublication = DateTime.Now;
+            pet.AddedIn = DateTime.Now;
 
             db.Pets.Add(pet);
             db.SaveChanges();

@@ -31,7 +31,7 @@ namespace PetMe.Controllers
                 return View("Login");
             }
 
-            var pets = db.Pets.Where(p => p.DonoId == id).ToList();
+            var pets = db.Pets.Where(p => p.OwnerId == id).ToList();
 
             var petViewModel = new PetListViewModel
             {
@@ -51,7 +51,7 @@ namespace PetMe.Controllers
                 pet = new Pet
                 {
                     Id = 0,
-                    DonoId = User.Identity.GetUserId()
+                    OwnerId = User.Identity.GetUserId()
                 };
                 return View(pet);
             }
@@ -71,7 +71,7 @@ namespace PetMe.Controllers
             if(pet.Id == 0)
             {
                 pet.Active = true;
-                pet.DateOfPublication = DateTime.Now;
+                pet.AddedIn = DateTime.Now;
                 db.Pets.Add(pet);
             }
             else
