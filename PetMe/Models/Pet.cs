@@ -8,62 +8,77 @@ namespace PetMe.Models
 {
     public class Pet
     {
+
+        /*  LISTA DE COISAS PARA IMPLEMENTAR
+         *  Fotos do pet (implementar classe tanto para fotos do animal quanto pessoas: classe image)
+         *  Decidir os campos que irão no endereço do animal --check
+         *  Adicionar o tipo de animal (classe PetType, decidir como será implementada) --check
+         *  Considerar a idade do animal em meses e quando o mesmo foi maior que 12, transformar em ano na view --check
+         *  Decidir se raça sera um campo livre e se aparecerá no filtro (Acredito que seja campo livre e não apareça no filtro) --check
+        */
+
         public int Id { get; set; }
-        //public PetPicture[] Pictures { get; set; }
-        public string DonoId { get; set; }
-        public ApplicationUser Dono { get; set; }
-        //public int TpAnimalId { get; set; }
-        //public T TpAnimal { get; set; }
+
         [Required]
-        [Display(Name="Nome do Pet")]
+        public string OwnerId { get; set; }
+        public virtual ApplicationUser Owner { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
-        //Tratar idade para considerar meses
         [Required]
-        [Display(Name="Idade")]
-        public byte Age { get; set; }
-
-        //Colocar uma tabela alternativa de raças ou deixar campo livre
-        //Talvez não seja um campo obrigatorio
+        public byte AgeInMonths { get; set; }
+        
         [Required]
-        [Display(Name="Raça")]
-        public string Subspecies { get; set; }
+        public int PetTypeId { get; set; }
+        public virtual PetType PetType { get; set; }
 
         [Required]
-        [Display(Name="Cor")]
+        public int PetBreedTypeId { get; set; }
+        public virtual PetBreedType PetBreedType { get; set; }
+        public string BreedDetail { get; set; }
+
+        [Required]
+        public int PetSizeId { get; set; }
+        public virtual PetSize PetSize { get; set; }
+
         public string Color { get; set; }
 
-        [Required]
-        [Display(Name="Peso")]
-        public float Weight { get; set; }
-
-        [Required]
-        [Display(Name="Tamanho")]
-        public string Size { get; set; } //trocar para enum ou classe banco
-
-        [Required]
-        [Display(Name="Vacinado?")]
         public bool Vaccinated { get; set; }
 
-        [Required]
-        [Display(Name="Adestrado?")]
         public bool Trained { get; set; }
 
-        [Required]
-        [Display(Name="Castrado")]
         public bool Castrated { get; set; }
 
-        [Required]
-        [Display(Name= "Cuidados Especiais?")]
         public bool SpecialCare { get; set; }
 
-        [Display(Name="Mais detalhes sobre os cuidados")]
-        public string DetailsSpecCare { get; set; }
+        public string DetailsSCare { get; set; }
 
-        [Display(Name="Sobre")]
-        public string MoreDetails { get; set; }
-        public DateTime DateOfPublication { get; set; }
-        public bool? Active { get; set; }
-        //Adicionar local do animal
+        public string Description { get; set; }
+
+        /* ANIMAL ADDRESS */
+        public bool LivesWithOwner { get; set; }
+
+        [MaxLength(8)]
+        public string ZipCode { get; set; }
+
+        [MaxLength(65)]
+        public string Address { get; set; }
+
+        [MaxLength(8)]
+        public string AddressNumber { get; set; }
+
+        [MaxLength(50)]
+        public string AddressComplement { get; set; }
+
+        public int CountyId { get; set; }
+        public virtual County County { get; set; }
+
+        public int StateId { get; set; }
+        public virtual State State { get; set; }
+
+        /* CONTROL FIELDS*/
+        public DateTime AddedIn { get; set; }
+        public bool Active { get; set; }
     }
 }

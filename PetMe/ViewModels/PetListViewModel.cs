@@ -10,5 +10,6 @@ namespace PetMe.ViewModels
     {
         public ApplicationUser User { get; set; }
         public List<Pet> Pets { get; set; }
+        public Filter Filter { get; set; }
     }
 }

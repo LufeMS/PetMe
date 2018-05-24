@@ -33,7 +33,7 @@ namespace PetMe.Models
         [MaxLength(8)]
         public string AddressNumber { get; set; }
 
-        [MaxLength(100)]
+        [MaxLength(50)]
         public string AddressComplement { get; set; }
 
         [MaxLength(50)]
