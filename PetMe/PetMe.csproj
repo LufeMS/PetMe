@@ -260,6 +260,22 @@
     <Compile Include="Migrations\201805242338239_fkstate2.Designer.cs">
       <DependentUpon>201805242338239_fkstate2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805250110176_petFormViewModel.cs" />
+    <Compile Include="Migrations\201805250110176_petFormViewModel.Designer.cs">
+      <DependentUpon>201805250110176_petFormViewModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805250116504_seedDbPets.cs" />
+    <Compile Include="Migrations\201805250116504_seedDbPets.Designer.cs">
+      <DependentUpon>201805250116504_seedDbPets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805250150567_SeedStateCounty.cs" />
+    <Compile Include="Migrations\201805250150567_SeedStateCounty.Designer.cs">
+      <DependentUpon>201805250150567_SeedStateCounty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805250253007_seedCounty.cs" />
+    <Compile Include="Migrations\201805250253007_seedCounty.Designer.cs">
+      <DependentUpon>201805250253007_seedCounty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Adoption.cs" />
@@ -441,6 +457,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805242338239_fkstate2.resx">
       <DependentUpon>201805242338239_fkstate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805250110176_petFormViewModel.resx">
+      <DependentUpon>201805250110176_petFormViewModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805250116504_seedDbPets.resx">
+      <DependentUpon>201805250116504_seedDbPets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805250150567_SeedStateCounty.resx">
+      <DependentUpon>201805250150567_SeedStateCounty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805250253007_seedCounty.resx">
+      <DependentUpon>201805250253007_seedCounty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

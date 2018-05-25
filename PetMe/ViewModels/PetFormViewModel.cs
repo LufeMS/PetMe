@@ -10,58 +10,80 @@ namespace PetMe.ViewModels
     public class PetFormViewModel
     {
         public int Id { get; set; }
-        //public PetPicture[] Pictures { get; set; }
-        public string DonoId { get; set; }
-        public ApplicationUser Dono { get; set; }
-        //public int TpAnimalId { get; set; }
-        //public T TpAnimal { get; set; }
+
+        [Required]
+        public string OwnerId { get; set; }
+        public virtual ApplicationUser Owner { get; set; }
+
         [Required]
         [Display(Name = "Nome do Pet")]
         public string Name { get; set; }
 
-        //Tratar idade para considerar meses
-        [Required]
         [Display(Name = "Idade")]
-        public byte Age { get; set; }
+        public byte AgeInMonths { get; set; }
 
-        //Colocar uma tabela alternativa de raças ou deixar campo livre
-        //Talvez não seja um campo obrigatorio
-        [Required]
-        [Display(Name = "Raça")]
-        public string Subspecies { get; set; }
+        [Display(Name = "Tipo de Animal")]
+        public byte PetTypeId { get; set; }
+        public virtual PetType PetType { get; set; }
 
-        [Required]
-        [Display(Name = "Cor")]
+        [Display(Name = "Tipo de Raça")]
+        public byte PetBreedTypeId { get; set; }
+        public virtual PetBreedType PetBreedType { get; set; }
+
+        [Display(Name = "Detalhes da Raça")]
+        public string BreedDetail { get; set; }
+
+        [Display(Name = "Porte")]
+        public byte PetSizeId { get; set; }
+        public virtual PetSize PetSize { get; set; }
+
+        [Display(Name = "Nome")]
         public string Color { get; set; }
 
-        [Required]
-        [Display(Name = "Peso")]
-        public float Weight { get; set; }
-
-        [Required]
-        [Display(Name = "Tamanho")]
-        public string Size { get; set; } //trocar para enum ou classe banco
-
-        [Required]
         [Display(Name = "Vacinado?")]
         public bool Vaccinated { get; set; }
 
-        [Required]
         [Display(Name = "Adestrado?")]
         public bool Trained { get; set; }
 
-        [Required]
-        [Display(Name = "Castrado")]
+        [Display(Name = "Castrado?")]
         public bool Castrated { get; set; }
 
-        [Required]
-        [Display(Name = "Cuidados Especiais?")]
+        [Display(Name = "Necessita de cuidados especiais?")]
         public bool SpecialCare { get; set; }
 
-        [Display(Name = "Mais detalhes sobre os cuidados")]
-        public string DetailsSpecCare { get; set; }
+        [Display(Name = "Detalhe os cuidados")]
+        public string DetailsSCare { get; set; }
 
-        [Display(Name = "Sobre")]
-        public string MoreDetails { get; set; }
+        [Display(Name = "Conte-nos um pouco sobre seu pet")]
+        public string Description { get; set; }
+
+        /* ANIMAL ADDRESS */
+        [Display(Name = "Vive no mesmo endereço que o dono?")]
+        public bool LivesWithOwner { get; set; }
+
+        [MaxLength(8)]
+        [Display(Name = "CEP")]
+        public string ZipCode { get; set; }
+
+        [MaxLength(65)]
+        [Display(Name = "Logradouro")]
+        public string Address { get; set; }
+
+        [MaxLength(8)]
+        [Display(Name = "Nº")]
+        public string AddressNumber { get; set; }
+
+        [MaxLength(50)]
+        [Display(Name = "Complemento")]
+        public string AddressComplement { get; set; }
+
+        [Display(Name = "Município")]
+        public int? CountyId { get; set; }
+        public virtual County County { get; set; }
+
+        [Display(Name = "Estado")]
+        public int? StateId { get; set; }
+        public virtual State State { get; set; }
     }
 }

@@ -26,19 +26,15 @@ namespace PetMe.Models
         [Required]
         public string Name { get; set; }
 
-        [Required]
         public byte AgeInMonths { get; set; }
 
-        [Required]
         public byte PetTypeId { get; set; }
         public virtual PetType PetType { get; set; }
 
-        [Required]
         public byte PetBreedTypeId { get; set; }
         public virtual PetBreedType PetBreedType { get; set; }
         public string BreedDetail { get; set; }
 
-        [Required]
         public byte PetSizeId { get; set; }
         public virtual PetSize PetSize { get; set; }
 
@@ -59,12 +55,15 @@ namespace PetMe.Models
         /* ANIMAL ADDRESS */
         public bool LivesWithOwner { get; set; }
 
+        [Required]
         [MaxLength(8)]
         public string ZipCode { get; set; }
 
+        [Required]
         [MaxLength(65)]
         public string Address { get; set; }
 
+        [Required]
         [MaxLength(8)]
         public string AddressNumber { get; set; }
 
