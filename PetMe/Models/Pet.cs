@@ -70,6 +70,9 @@ namespace PetMe.Models
         [MaxLength(50)]
         public string AddressComplement { get; set; }
 
+        [Required]
+        public string District { get; set; }
+
         public int CountyId { get; set; }
         public virtual County County { get; set; }
 

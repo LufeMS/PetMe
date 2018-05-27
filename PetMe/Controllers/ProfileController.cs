@@ -24,6 +24,8 @@ namespace PetMe.Controllers
         {
             var id = User.Identity.GetUserId();
             var user = db.Users.Find(id);
+            var state = db.States.Find(user.StateId);
+            var county = db.Counties.Find(user.CountyId);
 
             if (user == null)
             {
@@ -31,6 +33,32 @@ namespace PetMe.Controllers
             }
 
             var userViewModel = Mapper.Map<ApplicationUser, UserProfileViewModel>(user);
+            userViewModel.State = state.Name;
+            userViewModel.County = county.Name;
+
+            return View("Info", userViewModel);
+        }
+
+        public ActionResult SaveUser(UserProfileViewModel userViewModel)
+        {
+            if (!ModelState.IsValid)
+                return View("Info", userViewModel);
+
+            var user = db.Users.Find(userViewModel.Id);
+
+            if (user == null)
+                return HttpNotFound();
+
+            var state = db.States.Single(s => s.Name.Equals(userViewModel.State));
+            var county = db.Counties.Single(s => s.Name.Equals(userViewModel.County));
+
+            Mapper.Map(userViewModel, user);
+            user.StateId = state.Id;
+            user.CountyId = county.Id;
+            user.FormOk = true;
+            user.Deleted = false;
+
+            db.SaveChanges();
 
             return View("Info", userViewModel);
         }

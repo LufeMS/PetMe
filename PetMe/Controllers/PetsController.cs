@@ -61,12 +61,21 @@ namespace PetMe.Controllers
             return View(pet);
         }
 
-        public ActionResult SalvarPet(Pet pet)
+        public ActionResult SalvarPet(PetFormViewModel petViewModel)
         {
             if (!ModelState.IsValid)
             {
-                return View("PetForm", pet);
+                return View("PetForm", petViewModel);
             }
+
+            var pet = new Pet();
+            var county = db.Counties.First(c => c.Name.Equals(petViewModel.County)); 
+            var state = db.States.First(s => s.Name.Equals(petViewModel.State));
+            
+            Mapper.Map(petViewModel, pet);
+
+            pet.StateId = state.Id;
+            pet.CountyId = county.Id;
 
             if(pet.Id == 0)
             {

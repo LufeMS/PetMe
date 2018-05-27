@@ -14,6 +14,8 @@ namespace PetMe.App_Start
         {
             Mapper.CreateMap<ApplicationUser, UserProfileViewModel>();
             Mapper.CreateMap<UserProfileViewModel, ApplicationUser>();
+            Mapper.CreateMap<Pet, PetFormViewModel>();
+            Mapper.CreateMap<PetFormViewModel, Pet>();
             Mapper.CreateMap<Pet, Pet>();
         }
     }

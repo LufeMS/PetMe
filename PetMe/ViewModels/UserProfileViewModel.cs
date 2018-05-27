@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PetMe.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace PetMe.ViewModels
 {
     public class UserProfileViewModel
     {
-        public string ID { get; set; }
+        public string Id { get; set; }
 
         [Display(Name = "Username")]
         public string UserName { get; set; }
@@ -30,10 +31,10 @@ namespace PetMe.ViewModels
 
         [Display(Name = "Data de Nascimento")]
         public DateTime Birthdate { get; set; }
-        //Trocar string gender por referencia ao banco
 
         [Display(Name = "Gênero")]
-        public char Gender { get; set; }
+        public int GenderId { get; set; }
+        public virtual IEnumerable<UserGender> Gender { get; set; }
 
         [Required]
         [Display(Name = "Nº Documento")]
@@ -63,17 +64,15 @@ namespace PetMe.ViewModels
         [Display(Name = "CEP")]
         [MaxLength(8)]
         public string ZipCode { get; set; }
-        //Trocar as strings de cidade e estado por referencia ao banco
 
         [Required]
         [Display(Name = "Cidade")]
         [MaxLength(50)]
-        public string City { get; set; }
+        public string County { get; set; }
 
         [Required]
         [Display(Name = "Estado")]
         [MaxLength(50)]
         public string State { get; set; }
-        //Adicionar redes sociais
     }
 }
