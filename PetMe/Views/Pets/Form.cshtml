@@ -1,7 +1,9 @@
 ﻿@model PetMe.ViewModels.PetFormViewModel
 @{
-    ViewBag.Title = "PetForm";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "PetForm";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>PetForm</h2>
@@ -20,12 +22,12 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(p => p.PetTypeId)
-        @Html.DropDownListFor(p => p.PetTypeId, new SelectList(Model.PetType, "Id", "Name"), "Selecione o tipo de animal", new { @class = "form-control" })
+        @Html.DropDownListFor(p => p.PetTypeId, new SelectList(Model.PetTypes, "Id", "Name"), "Selecione o tipo de animal", new { @class = "form-control" })
         @Html.ValidationMessageFor(p => p.PetTypeId)
     </div>
     <div class="form-group">
         @Html.LabelFor(p => p.PetBreedTypeId)
-        @Html.DropDownListFor(p => p.PetBreedTypeId, new SelectList(Model.PetBreedType, "Id", "Name"), "Selecione o tipo de raça", new { @class = "form-control" })
+        @Html.DropDownListFor(p => p.PetBreedTypeId, new SelectList(Model.PetBreedTypes, "Id", "Name"), "Selecione o tipo de raça", new { @class = "form-control" })
         @Html.ValidationMessageFor(p => p.PetBreedTypeId)
     </div>
     <div class="form-group">
@@ -39,8 +41,13 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(p => p.PetSizeId)
-        @Html.DropDownListFor(p => p.PetSizeId, new SelectList(Model.PetSize, "Id", "Name"), "Selecione o porte do pet", new { @class = "form-control" })
+        @Html.DropDownListFor(p => p.PetSizeId, new SelectList(Model.PetSizes, "Id", "Name"), "Selecione o porte do pet", new { @class = "form-control" })
         @Html.ValidationMessageFor(p => p.PetSizeId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(p => p.PetGenderId)
+        @Html.DropDownListFor(p => p.PetGenderId, new SelectList(Model.PetGenders, "Id", "Name"), "Selecione o sexo do pet", new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.PetGenderId)
     </div>
     <div class="custom-checkbox">
         <label>
@@ -74,7 +81,7 @@
     </div>
     <div class="custom-checkbox">
         <label>
-            @Html.CheckBoxFor(p => p.LivesWithOwner) Mora com o dono?
+            @Html.CheckBoxFor(p => p.LivesWithOwner) Vive no mesmo endereço que o dono?
         </label>
     </div>
     <div class="form-group">
@@ -97,14 +104,14 @@
         @Html.TextAreaFor(p => p.AddressComplement, new { @class = "form-control" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(p => p.County)
-        @Html.TextAreaFor(p => p.County, new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.County)
+        @Html.LabelFor(p => p.CountyView)
+        @Html.TextAreaFor(p => p.CountyView, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.CountyView)
     </div>
     <div class="form-group">
-        @Html.LabelFor(p => p.State)
-        @Html.TextAreaFor(p => p.State, new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.State)
+        @Html.LabelFor(p => p.StateView)
+        @Html.TextAreaFor(p => p.StateView, new { @class = "form-control" })
+        @Html.ValidationMessageFor(p => p.StateView)
     </div>
     @*@Html.AntiForgeryToken()*@
     @Html.HiddenFor(p => p.Id)

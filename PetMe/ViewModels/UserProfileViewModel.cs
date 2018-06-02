@@ -34,7 +34,6 @@ namespace PetMe.ViewModels
 
         [Display(Name = "Gênero")]
         public int GenderId { get; set; }
-        public virtual IEnumerable<UserGender> Gender { get; set; }
 
         [Required]
         [Display(Name = "Nº Documento")]
@@ -68,11 +67,14 @@ namespace PetMe.ViewModels
         [Required]
         [Display(Name = "Cidade")]
         [MaxLength(50)]
-        public string County { get; set; }
+        public string CountyView { get; set; }
 
         [Required]
         [Display(Name = "Estado")]
         [MaxLength(50)]
-        public string State { get; set; }
+        public string StateView { get; set; }
+
+        public IEnumerable<UserGender> Genders { get; set; }
+
     }
 }

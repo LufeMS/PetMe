@@ -38,6 +38,9 @@ namespace PetMe.Models
         public byte PetSizeId { get; set; }
         public virtual PetSize PetSize { get; set; }
 
+        public byte PetGenderId { get; set; }
+        public virtual PetGender PetGender { get; set; }
+
         public string Color { get; set; }
 
         public bool Vaccinated { get; set; }
@@ -82,5 +85,16 @@ namespace PetMe.Models
         /* CONTROL FIELDS*/
         public DateTime AddedIn { get; set; }
         public bool Active { get; set; }
+
+        public void FillInAddress (ApplicationUser owner)
+        {
+            CountyId = owner.CountyId ?? 0;
+            StateId = owner.StateId ?? 0;
+            Address = owner.Address;
+            AddressNumber = owner.AddressNumber;
+            AddressComplement = owner.AddressComplement;
+            ZipCode = owner.ZipCode;
+            District = owner.District;
+        }
     }
 }

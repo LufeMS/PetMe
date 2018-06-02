@@ -8,7 +8,7 @@ namespace PetMe.Migrations
         public override void Up()
         {
             Sql(@"INSERT INTO dbo.PetSizes (Id, Name) Values (1,'Pequeno'), (2,'Médio'), (3,'Grande')");
-            Sql(@"INSERT INTO dbo.PetBreedTypes (Id, Name) Values (1,'Pura'), (2,'Mista'), (3,'Vira-Lata')");
+            Sql(@"INSERT INTO dbo.PetBreedTypes (Id, Name) Values (1,'Pura'), (2,'Mista')");
             Sql(@"INSERT INTO dbo.PetTypes (Id, Name) Values (1,'Cachorro')
                                                             ,(2,'Gato')
                                                             ,(3,'Furão')

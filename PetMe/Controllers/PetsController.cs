@@ -39,26 +39,41 @@ namespace PetMe.Controllers
                 Pets = pets
             };
 
-            return View(petViewModel);
+            return View("List", petViewModel);
         }
 
         public ActionResult PetForm(int? id)
         {
             Pet pet;
+            PetFormViewModel petViewModel = new PetFormViewModel();
+            var petBreedTypes = db.PetBreedTypes.ToList();
+            var petSizes = db.PetSizes.ToList();
+            var petTypes = db.PetTypes.ToList();
+            var petGenders = db.PetGenders.ToList();
 
             if (id == null)
             {
-                pet = new Pet
+                petViewModel = new PetFormViewModel
                 {
                     Id = 0,
-                    OwnerId = User.Identity.GetUserId()
+                    OwnerId = User.Identity.GetUserId(),
+                    PetBreedTypes = petBreedTypes,
+                    PetSizes = petSizes,
+                    PetTypes = petTypes,
+                    PetGenders = petGenders
                 };
-                return View(pet);
+                return View("Form", petViewModel);
             }
 
             pet = db.Pets.Find(id);
 
-            return View(pet);
+            Mapper.Map(pet, petViewModel);
+            petViewModel.PetTypes = petTypes;
+            petViewModel.PetSizes = petSizes;
+            petViewModel.PetBreedTypes = petBreedTypes;
+            petViewModel.PetGenders = petGenders;
+
+            return View("Form", petViewModel);
         }
 
         public ActionResult SalvarPet(PetFormViewModel petViewModel)
@@ -69,14 +84,23 @@ namespace PetMe.Controllers
             }
 
             var pet = new Pet();
-            var county = db.Counties.First(c => c.Name.Equals(petViewModel.County)); 
-            var state = db.States.First(s => s.Name.Equals(petViewModel.State));
-            
+
             Mapper.Map(petViewModel, pet);
 
-            pet.StateId = state.Id;
-            pet.CountyId = county.Id;
+            if (petViewModel.LivesWithOwner)
+            {
+                var owner = db.Users.Find(petViewModel.OwnerId);
+                pet.FillInAddress(owner);
+            }
+            else
+            {
+                var county = db.Counties.First(c => c.Name.Equals(petViewModel.CountyView));
+                var state = db.States.First(s => s.Name.Equals(petViewModel.StateView));
 
+                pet.StateId = state.Id;
+                pet.CountyId = county.Id;
+            }
+            
             if(pet.Id == 0)
             {
                 pet.Active = true;
@@ -97,7 +121,5 @@ namespace PetMe.Controllers
 
             return RedirectToAction("PetList");
         }
-
-
     }
 }

@@ -11,10 +11,12 @@
     <div class="form-group">
         @Html.LabelFor(u => u.UserName)
         @Html.TextBoxFor(u => u.UserName, new { @class = "form-control", @disabled = true })
+        @Html.HiddenFor(u => u.UserName)
     </div>
     <div class="form-group">
         @Html.LabelFor(u => u.Email)
         @Html.TextBoxFor(u => u.Email, new { @class = "form-control", @disabled = true })
+        @Html.HiddenFor(u => u.Email)
     </div>
     <div class="form-group">
         @Html.LabelFor(u => u.FirstName)
@@ -28,12 +30,12 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(u => u.Birthdate)
-        @Html.TextBoxFor(u => u.Birthdate, new { @class = "form-control", @type = "Date" })
+        @Html.TextBoxFor(u => u.Birthdate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "Date" })
         @Html.ValidationMessageFor(u => u.Birthdate)
     </div>
     <div class="form-group">
         @Html.LabelFor(u => u.GenderId)
-        @Html.DropDownListFor(u => u.GenderId, new SelectList(Model.Gender, "Id", "Name"), "Selecione o Gênero", new { @class = "form-control" })
+        @Html.DropDownListFor(u => u.GenderId, new SelectList(Model.Genders, "Id", "Name"), "Selecione o Gênero", new { @class = "form-control" })
     </div>
     <div class="form-group">
         @Html.LabelFor(u => u.DocumentNumber)
@@ -66,14 +68,14 @@
         @Html.ValidationMessageFor(u => u.District)
     </div>
     <div class="form-group">
-        @Html.LabelFor(u => u.County)
-        @Html.TextBoxFor(u => u.County, new { @class = "form-control" })
-        @Html.ValidationMessageFor(u => u.County)
+        @Html.LabelFor(u => u.CountyView)
+        @Html.TextBoxFor(u => u.CountyView, new { @class = "form-control" })
+        @Html.ValidationMessageFor(u => u.CountyView)
     </div>
     <div class="form-group">
-        @Html.LabelFor(u => u.State)
-        @Html.TextBoxFor(u => u.State, new { @class = "form-control" })
-        @Html.ValidationMessageFor(u => u.State)
+        @Html.LabelFor(u => u.StateView)
+        @Html.TextBoxFor(u => u.StateView, new { @class = "form-control" })
+        @Html.ValidationMessageFor(u => u.StateView)
     </div>
     @Html.HiddenFor(u => u.Id)
     //@Html.AntiForgeryToken();

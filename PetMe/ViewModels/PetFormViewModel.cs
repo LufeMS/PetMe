@@ -24,20 +24,24 @@ namespace PetMe.ViewModels
 
         [Display(Name = "Tipo de Animal")]
         public byte PetTypeId { get; set; }
-        public IEnumerable<PetType> PetType { get; set; }
+        public IEnumerable<PetType> PetTypes { get; set; }
 
         [Display(Name = "Tipo de Raça")]
         public byte PetBreedTypeId { get; set; }
-        public IEnumerable<PetBreedType> PetBreedType { get; set; }
+        public IEnumerable<PetBreedType> PetBreedTypes { get; set; }
 
         [Display(Name = "Detalhes da Raça")]
         public string BreedDetail { get; set; }
 
+        [Display(Name = "Sexo")]
+        public byte PetGenderId { get; set; }
+        public IEnumerable<PetGender> PetGenders { get; set; }
+
         [Display(Name = "Porte")]
         public byte PetSizeId { get; set; }
-        public IEnumerable<PetSize> PetSize { get; set; }
+        public IEnumerable<PetSize> PetSizes { get; set; }
 
-        [Display(Name = "Nome")]
+        [Display(Name = "Cor")]
         public string Color { get; set; }
 
         [Display(Name = "Vacinado?")]
@@ -83,9 +87,9 @@ namespace PetMe.ViewModels
         public string District { get; set; }
 
         [Display(Name = "Município")]
-        public string County { get; set; }
+        public string CountyView { get; set; }
 
         [Display(Name = "Estado")]
-        public string State { get; set; }
+        public string StateView { get; set; }
     }
 }

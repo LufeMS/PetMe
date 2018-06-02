@@ -4,6 +4,7 @@ using PetMe.Models;
 using PetMe.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -28,13 +29,16 @@ namespace PetMe.Controllers
             var county = db.Counties.Find(user.CountyId);
 
             if (user == null)
-            {
                 return HttpNotFound();
-            }
 
             var userViewModel = Mapper.Map<ApplicationUser, UserProfileViewModel>(user);
-            userViewModel.State = state.Name;
-            userViewModel.County = county.Name;
+            userViewModel.Genders = db.UserGenders.ToList();
+
+            if (state != null)
+                userViewModel.StateView = state.Name;
+
+            if (county != null)
+                userViewModel.CountyView = county.Name;
 
             return View("Info", userViewModel);
         }
@@ -49,8 +53,8 @@ namespace PetMe.Controllers
             if (user == null)
                 return HttpNotFound();
 
-            var state = db.States.Single(s => s.Name.Equals(userViewModel.State));
-            var county = db.Counties.Single(s => s.Name.Equals(userViewModel.County));
+            var state = db.States.Single(s => s.Name.Equals(userViewModel.StateView));
+            var county = db.Counties.Single(s => s.Name.Equals(userViewModel.CountyView));
 
             Mapper.Map(userViewModel, user);
             user.StateId = state.Id;
@@ -59,6 +63,8 @@ namespace PetMe.Controllers
             user.Deleted = false;
 
             db.SaveChanges();
+
+            userViewModel.Genders = db.UserGenders.ToList();
 
             return View("Info", userViewModel);
         }

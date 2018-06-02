@@ -288,6 +288,14 @@
     <Compile Include="Migrations\201805271759179_genderSeed.Designer.cs">
       <DependentUpon>201805271759179_genderSeed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806022205132_PetGenders.cs" />
+    <Compile Include="Migrations\201806022205132_PetGenders.Designer.cs">
+      <DependentUpon>201806022205132_PetGenders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806022210065_FkAndSeedPetGenders.cs" />
+    <Compile Include="Migrations\201806022210065_FkAndSeedPetGenders.Designer.cs">
+      <DependentUpon>201806022210065_FkAndSeedPetGenders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Adoption.cs" />
@@ -298,6 +306,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PetBreedType.cs" />
+    <Compile Include="Models\PetGender.cs" />
     <Compile Include="Models\PetSize.cs" />
     <Compile Include="Models\PetType.cs" />
     <Compile Include="Models\State.cs" />
@@ -490,6 +499,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805271759179_genderSeed.resx">
       <DependentUpon>201805271759179_genderSeed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806022205132_PetGenders.resx">
+      <DependentUpon>201806022205132_PetGenders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806022210065_FkAndSeedPetGenders.resx">
+      <DependentUpon>201806022210065_FkAndSeedPetGenders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
