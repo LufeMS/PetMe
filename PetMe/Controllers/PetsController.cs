@@ -19,7 +19,53 @@ namespace PetMe.Controllers
             db = new ApplicationDbContext();
         }
 
-        public ActionResult PetList(string id)
+        public ActionResult Filter(PetListViewModel petViewModel)
+        {
+            if (!ModelState.IsValid)
+                return View("List", petViewModel);
+
+            IEnumerable<Pet> petsFiltered;
+
+            if (petViewModel.User != null)
+                petsFiltered = db.Pets.Where(p => p.OwnerId.Equals(petViewModel.User.Id)).ToList();
+            else
+                petsFiltered = db.Pets.ToList();
+
+            if (petViewModel.Filter.PetBreedTypeId != null)
+                petsFiltered.Where(p => p.PetBreedTypeId == petViewModel.Filter.PetBreedTypeId);
+
+            if (petViewModel.Filter.PetGenderId != null)
+                petsFiltered.Where(p => p.PetGenderId == petViewModel.Filter.PetGenderId);
+
+            if (petViewModel.Filter.PetSizeId != null)
+                petsFiltered.Where(p => p.PetSizeId == petViewModel.Filter.PetSizeId);
+
+            if (petViewModel.Filter.PetTypeId != null)
+                petsFiltered.Where(p => p.PetTypeId == petViewModel.Filter.PetTypeId);
+
+            if (petViewModel.Filter.AgeRange != null)
+            {
+                if(petViewModel.Filter.AgeRange == PetFilter.PetAgeRanges.lessThanOne)
+                    petsFiltered.Where(p => p.AgeInMonths < 12);
+
+                else if (petViewModel.Filter.AgeRange == PetFilter.PetAgeRanges.betweenOneAndFive)
+                    petsFiltered.Where(p => p.AgeInMonths >= 12 && p.AgeInMonths <= 71);
+
+                else if (petViewModel.Filter.AgeRange == PetFilter.PetAgeRanges.greaterThanSix)
+                    petsFiltered.Where(p => p.AgeInMonths >= 72);
+            }
+
+            petsFiltered.Where(p => p.Castrated == petViewModel.Filter.Castrated
+                                    && p.Trained == petViewModel.Filter.Trained
+                                    && p.Vaccinated == petViewModel.Filter.Vaccinated
+                                    && p.SpecialCare == petViewModel.Filter.SpecialCare);
+
+            petViewModel.Pets = petsFiltered;
+
+            return View("List", petViewModel);
+        }
+
+        public ActionResult PetOwnerList(string id)
         {
             if (id == null)
                 id = User.Identity.GetUserId();
@@ -36,6 +82,18 @@ namespace PetMe.Controllers
             var petViewModel = new PetListViewModel
             {
                 User = user,
+                Pets = pets
+            };
+
+            return View("List", petViewModel);
+        }
+
+        public ActionResult PetList()
+        {
+            var pets = db.Pets.ToList();
+
+            var petViewModel = new PetListViewModel
+            {
                 Pets = pets
             };
 

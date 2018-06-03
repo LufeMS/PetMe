@@ -8,13 +8,64 @@
 
 <a href="@Url.Action("PetForm", "Pets")" class="btn btn-primary">Novo Pet</a>
 
+@using (Html.BeginForm("Filter", "Pets"))
+{
+    <div class="form-group">
+        @Html.LabelFor(f => f.Filter.CountyId)
+        @Html.DropDownListFor(f => f.Filter.CountyId, new SelectList(Model.Filter.Counties, "Id", "Name"), "Selecione um Município", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(f => f.Filter.StateId)
+        @Html.DropDownListFor(f => f.Filter.StateId, new SelectList(Model.Filter.States, "Id", "Name"), "Selecione um Estado", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(f => f.Filter.PetSizeId)
+        @Html.DropDownListFor(f => f.Filter.PetSizeId, new SelectList(Model.Filter.PetSizes, "Id", "Name"), "Selecione um Porte", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(f => f.Filter.PetTypeId)
+        @Html.DropDownListFor(f => f.Filter.PetTypeId, new SelectList(Model.Filter.PetTypes, "Id", "Name"), "Selecione um Tipo de Animal", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(f => f.Filter.PetGenderId)
+        @Html.DropDownListFor(f => f.Filter.PetGenderId, new SelectList(Model.Filter.PetGenders, "Id", "Name"), "Selecione um Sexo", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(f => f.Filter.PetBreedTypeId)
+        @Html.DropDownListFor(f => f.Filter.PetBreedTypeId, new SelectList(Model.Filter.PetBreedTypes, "Id", "Name"), "Selecione a Raça", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.EnumDropDownListFor(f => f.Filter.AgeRange, "Selecione a idade do pet", new { @class = "form-control" })
+    </div>
+    <div class="custom-checkbox">
+        <label>
+            @Html.CheckBoxFor(f => f.Filter.Vaccinated) Vacinado?
+        </label>
+    </div>
+    <div class="custom-checkbox">
+        <label>
+            @Html.CheckBoxFor(f => f.Filter.Trained) Adestrado?
+        </label>
+    </div>
+    <div class="custom-checkbox">
+        <label>
+            @Html.CheckBoxFor(f => f.Filter.Castrated) Castrado?
+        </label>
+    </div>
+    <div class="custom-checkbox">
+        <label>
+            @Html.CheckBoxFor(f => f.Filter.SpecialCare) Cuidados Especiais?
+        </label>
+    </div>
+    <button class="btn btn-primary" type="submit">Filtrar</button>
+}
+
 @if (!Model.Pets.Any())
 {
     <h1>Não existem pets cadastrados ainda</h1>
 }
 else
 {
-    //criar uma viewmodel para os forms PetFormViewModel
     <table>
         <thead>
             <tr>
@@ -28,7 +79,7 @@ else
             {
                 <tr>
                     <td></td>
-                    <td>@Html.ActionLink(pet.Name, "PetForm", new { id = pet.Id})</td>
+                    <td>@Html.ActionLink(pet.Name, "PetForm", new { id = pet.Id })</td>
                     <td>@pet.Description</td>
                 </tr>
             }

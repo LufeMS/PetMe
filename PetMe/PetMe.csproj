@@ -301,7 +301,7 @@
     <Compile Include="Models\Adoption.cs" />
     <Compile Include="Models\AdoptionStatus.cs" />
     <Compile Include="Models\County.cs" />
-    <Compile Include="Models\Filter.cs" />
+    <Compile Include="Models\PetFilter.cs" />
     <Compile Include="Models\Pet.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
