@@ -206,6 +206,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdoptionsController.cs" />
     <Compile Include="Controllers\Api\FiltersController.cs" />
     <Compile Include="Controllers\Api\PetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -299,6 +300,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Adoption.cs" />
+    <Compile Include="Models\AdoptionMail.cs" />
     <Compile Include="Models\AdoptionStatus.cs" />
     <Compile Include="Models\County.cs" />
     <Compile Include="Models\PetFilter.cs" />
@@ -314,8 +316,11 @@
     <Compile Include="Models\Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AdoptionListViewModel.cs" />
+    <Compile Include="ViewModels\AdoptionViewModel.cs" />
     <Compile Include="ViewModels\PetFormViewModel.cs" />
     <Compile Include="ViewModels\PetListViewModel.cs" />
+    <Compile Include="ViewModels\PetViewModel.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -431,9 +436,12 @@
     <Content Include="Views\Pets\List.cshtml" />
     <Content Include="Views\Pets\Form.cshtml" />
     <Content Include="Views\Pets\Search.cshtml" />
+    <Content Include="Views\Pets\Info.cshtml" />
+    <Content Include="Views\Pets\OwnerList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Adoptions\" />
     <Folder Include="Views\Institution\" />
   </ItemGroup>
   <ItemGroup>

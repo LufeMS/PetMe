@@ -1,10 +1,12 @@
 ﻿@model PetMe.ViewModels.PetListViewModel
 @{
-    ViewBag.Title = "PetList";
+    ViewBag.Title = "OwnerList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>PetList</h2>
+
+<a href="@Url.Action("PetForm", "Pets")" class="btn btn-primary">Novo Pet</a>
 
 @using (Html.BeginForm("Filter", "Pets"))
 {
@@ -55,6 +57,7 @@
             @Html.CheckBoxFor(f => f.Filter.SpecialCare) Cuidados Especiais?
         </label>
     </div>
+    @Html.HiddenFor(m => m.User.Id)
     <button class="btn btn-primary" type="submit">Filtrar</button>
 }
 
@@ -77,10 +80,11 @@ else
             {
                 <tr>
                     <td></td>
-                    <td>@Html.ActionLink(pet.Name, "PetInfo", new { id = pet.Id })</td>
+                    <td>@Html.ActionLink(pet.Name, "PetForm", new { id = pet.Id })</td>
                     <td>@pet.Description</td>
                 </tr>
             }
         </tbody>
     </table>
 }
+

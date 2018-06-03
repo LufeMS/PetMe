@@ -32,43 +32,64 @@ namespace PetMe.Controllers
                 petsFiltered = db.Pets.ToList();
 
             if (petViewModel.Filter.PetBreedTypeId != null)
-                petsFiltered.Where(p => p.PetBreedTypeId == petViewModel.Filter.PetBreedTypeId);
+                petsFiltered = petsFiltered.Where(p => p.PetBreedTypeId == petViewModel.Filter.PetBreedTypeId);
 
             if (petViewModel.Filter.PetGenderId != null)
-                petsFiltered.Where(p => p.PetGenderId == petViewModel.Filter.PetGenderId);
+                petsFiltered = petsFiltered.Where(p => p.PetGenderId == petViewModel.Filter.PetGenderId);
 
             if (petViewModel.Filter.PetSizeId != null)
-                petsFiltered.Where(p => p.PetSizeId == petViewModel.Filter.PetSizeId);
+                petsFiltered = petsFiltered.Where(p => p.PetSizeId == petViewModel.Filter.PetSizeId);
 
             if (petViewModel.Filter.PetTypeId != null)
-                petsFiltered.Where(p => p.PetTypeId == petViewModel.Filter.PetTypeId);
+                petsFiltered = petsFiltered.Where(p => p.PetTypeId == petViewModel.Filter.PetTypeId);
+
+            if (petViewModel.Filter.StateId != null)
+                petsFiltered = petsFiltered.Where(p => p.StateId == petViewModel.Filter.StateId);
+
+            if (petViewModel.Filter.CountyId != null)
+                petsFiltered = petsFiltered.Where(p => p.StateId == petViewModel.Filter.CountyId);
 
             if (petViewModel.Filter.AgeRange != null)
             {
                 if(petViewModel.Filter.AgeRange == PetFilter.PetAgeRanges.lessThanOne)
-                    petsFiltered.Where(p => p.AgeInMonths < 12);
+                    petsFiltered = petsFiltered.Where(p => p.AgeInMonths < 12);
 
                 else if (petViewModel.Filter.AgeRange == PetFilter.PetAgeRanges.betweenOneAndFive)
-                    petsFiltered.Where(p => p.AgeInMonths >= 12 && p.AgeInMonths <= 71);
+                    petsFiltered = petsFiltered.Where(p => p.AgeInMonths >= 12 && p.AgeInMonths <= 71);
 
                 else if (petViewModel.Filter.AgeRange == PetFilter.PetAgeRanges.greaterThanSix)
-                    petsFiltered.Where(p => p.AgeInMonths >= 72);
+                    petsFiltered = petsFiltered.Where(p => p.AgeInMonths >= 72);
             }
 
-            petsFiltered.Where(p => p.Castrated == petViewModel.Filter.Castrated
+            petsFiltered = petsFiltered.Where(p => p.Castrated == petViewModel.Filter.Castrated
                                     && p.Trained == petViewModel.Filter.Trained
                                     && p.Vaccinated == petViewModel.Filter.Vaccinated
                                     && p.SpecialCare == petViewModel.Filter.SpecialCare);
 
+            var petBreedTypes = db.PetBreedTypes.ToList();
+            var petSizes = db.PetSizes.ToList();
+            var petTypes = db.PetTypes.ToList();
+            var petGenders = db.PetGenders.ToList();
+            var counties = db.Counties.ToList();
+            var states = db.States.ToList();
+
             petViewModel.Pets = petsFiltered;
+            petViewModel.Filter.PetBreedTypes = petBreedTypes;
+            petViewModel.Filter.PetSizes = petSizes;
+            petViewModel.Filter.PetTypes = petTypes;
+            petViewModel.Filter.PetGenders = petGenders;
+            petViewModel.Filter.Counties = counties;
+            petViewModel.Filter.States = states;
+
+            if (petViewModel.User != null)
+                return View("OwnerList", petViewModel);
 
             return View("List", petViewModel);
         }
 
-        public ActionResult PetOwnerList(string id)
+        public ActionResult PetOwnerList()
         {
-            if (id == null)
-                id = User.Identity.GetUserId();
+            string id = User.Identity.GetUserId();
 
             var user = db.Users.Find(id);
 
@@ -77,23 +98,57 @@ namespace PetMe.Controllers
                 return View("Login");
             }
 
+            var petBreedTypes = db.PetBreedTypes.ToList();
+            var petSizes = db.PetSizes.ToList();
+            var petTypes = db.PetTypes.ToList();
+            var petGenders = db.PetGenders.ToList();
+            var counties = db.Counties.ToList();
+            var states = db.States.ToList();
+
             var pets = db.Pets.Where(p => p.OwnerId == id).ToList();
 
             var petViewModel = new PetListViewModel
             {
+                Filter = new PetFilter
+                {
+                    PetBreedTypes = petBreedTypes,
+                    PetGenders = petGenders,
+                    PetSizes = petSizes,
+                    PetTypes = petTypes,
+                    States = states,
+                    Counties = counties,
+                },
+
                 User = user,
                 Pets = pets
             };
 
-            return View("List", petViewModel);
+            return View("OwnerList", petViewModel);
         }
 
         public ActionResult PetList()
         {
             var pets = db.Pets.ToList();
 
+            var petBreedTypes = db.PetBreedTypes.ToList();
+            var petSizes = db.PetSizes.ToList();
+            var petTypes = db.PetTypes.ToList();
+            var petGenders = db.PetGenders.ToList();
+            var counties = db.Counties.ToList();
+            var states = db.States.ToList();
+
             var petViewModel = new PetListViewModel
             {
+                Filter = new PetFilter
+                {
+                    PetBreedTypes = petBreedTypes,
+                    PetGenders = petGenders,
+                    PetSizes = petSizes,
+                    PetTypes = petTypes,
+                    States = states,
+                    Counties = counties,
+                },
+
                 Pets = pets
             };
 
@@ -108,7 +163,9 @@ namespace PetMe.Controllers
             var petSizes = db.PetSizes.ToList();
             var petTypes = db.PetTypes.ToList();
             var petGenders = db.PetGenders.ToList();
-
+            //var counties = db.Counties.ToList();
+            //var states = db.States.ToList();
+            
             if (id == null)
             {
                 petViewModel = new PetFormViewModel
@@ -177,7 +234,7 @@ namespace PetMe.Controllers
 
             db.SaveChanges();
 
-            return RedirectToAction("PetList");
+            return RedirectToAction("PetOwnerList");
         }
     }
 }
