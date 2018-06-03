@@ -236,5 +236,27 @@ namespace PetMe.Controllers
 
             return RedirectToAction("PetOwnerList");
         }
+
+        public ActionResult PetInfo(int id)
+        {
+            var pet = db.Pets.Find(id);
+
+            if (pet == null)
+            {
+                return HttpNotFound();
+            }
+
+            var owner = db.Users.Find(pet.OwnerId);
+            var user = db.Users.Find(User.Identity.GetUserId());
+
+            var petViewModel = new PetInfoViewModel
+            {
+                PetInfo = pet,
+                UserInfo = user,
+                OwnerInfo = owner
+            };
+
+            return View("Info", petViewModel);
+        }
     }
 }

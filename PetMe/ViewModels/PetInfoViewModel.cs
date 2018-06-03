@@ -6,7 +6,7 @@ using System.Web;
 
 namespace PetMe.ViewModels
 {
-    public class PetViewModel
+    public class PetInfoViewModel
     {
         public ApplicationUser UserInfo { get; set; }
         public Pet PetInfo { get; set; }

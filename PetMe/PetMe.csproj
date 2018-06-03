@@ -320,7 +320,7 @@
     <Compile Include="ViewModels\AdoptionViewModel.cs" />
     <Compile Include="ViewModels\PetFormViewModel.cs" />
     <Compile Include="ViewModels\PetListViewModel.cs" />
-    <Compile Include="ViewModels\PetViewModel.cs" />
+    <Compile Include="ViewModels\PetInfoViewModel.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
