@@ -9,10 +9,10 @@ namespace PetMe.Models
     {
         public int Id { get; set; }
 
-        public int InterestedUserId { get; set; }
+        public string InterestedUserId { get; set; }
         public virtual ApplicationUser InterestedUser { get; set; }
 
-        public int PetOwnerId { get; set; }
+        public string PetOwnerId { get; set; }
         public virtual ApplicationUser PetOwner { get; set; }
 
         public int AnimalId { get; set; }

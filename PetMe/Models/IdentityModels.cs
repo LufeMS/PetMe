@@ -79,6 +79,9 @@ namespace PetMe.Models
         public DbSet<State> States { get; set; }
         public DbSet<UserGender> UserGenders { get; set; }
         public DbSet<PetGender> PetGenders { get; set; }
+        public DbSet<Adoption> Adoptions { get; set; }
+        public DbSet<AdoptionMail> AdoptionMails { get; set; }
+        public DbSet<AdoptionStatus> AdoptionStatus { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

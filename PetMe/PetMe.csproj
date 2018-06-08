@@ -297,6 +297,14 @@
     <Compile Include="Migrations\201806022210065_FkAndSeedPetGenders.Designer.cs">
       <DependentUpon>201806022210065_FkAndSeedPetGenders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806062304123_AdoptionStart.cs" />
+    <Compile Include="Migrations\201806062304123_AdoptionStart.Designer.cs">
+      <DependentUpon>201806062304123_AdoptionStart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806062308411_SeedAdoptionStatus.cs" />
+    <Compile Include="Migrations\201806062308411_SeedAdoptionStatus.Designer.cs">
+      <DependentUpon>201806062308411_SeedAdoptionStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Adoption.cs" />
@@ -317,6 +325,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AdoptionListViewModel.cs" />
+    <Compile Include="ViewModels\AdoptionMailViewModel.cs" />
     <Compile Include="ViewModels\AdoptionViewModel.cs" />
     <Compile Include="ViewModels\PetFormViewModel.cs" />
     <Compile Include="ViewModels\PetListViewModel.cs" />
@@ -438,10 +447,10 @@
     <Content Include="Views\Pets\Search.cshtml" />
     <Content Include="Views\Pets\Info.cshtml" />
     <Content Include="Views\Pets\OwnerList.cshtml" />
+    <Content Include="Views\Adoptions\AdoptionConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Adoptions\" />
     <Folder Include="Views\Institution\" />
   </ItemGroup>
   <ItemGroup>
@@ -513,6 +522,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806022210065_FkAndSeedPetGenders.resx">
       <DependentUpon>201806022210065_FkAndSeedPetGenders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806062304123_AdoptionStart.resx">
+      <DependentUpon>201806062304123_AdoptionStart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806062308411_SeedAdoptionStatus.resx">
+      <DependentUpon>201806062308411_SeedAdoptionStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

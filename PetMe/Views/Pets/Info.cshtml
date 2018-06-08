@@ -8,9 +8,9 @@
 
 @using (Html.BeginForm("Adopt", "Adoptions"))
 {
-    Html.HiddenFor(m => m.PetInfo.Id);
-    Html.HiddenFor(m => m.OwnerInfo.Id);
-    Html.HiddenFor(m => m.UserInfo.Id);
+    @Html.HiddenFor(m => m.PetInfo.Id);
+    @Html.HiddenFor(m => m.OwnerInfo.Id);
+    @Html.HiddenFor(m => m.UserInfo.Id);
     <button class="btn btn-primary">Adotar Pet</button>
 }
 
