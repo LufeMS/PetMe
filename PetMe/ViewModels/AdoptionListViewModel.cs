@@ -7,5 +7,6 @@ namespace PetMe.ViewModels
 {
     public class AdoptionListViewModel
     {
+        public List<AdoptionViewModel> Adoptions { get; set; }
     }
 }

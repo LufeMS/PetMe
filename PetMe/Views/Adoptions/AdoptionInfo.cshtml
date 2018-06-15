@@ -1,0 +1,69 @@
+﻿@model PetMe.ViewModels.AdoptionViewModel
+@{
+    ViewBag.Title = "AdoptionInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AdoptionInfo</h2>
+
+<p>Pet: @Model.PetInfo.Name</p>
+<p>Dono: @Model.OwnerInfo.FirstName</p>
+<p>Pessoa Interessada: @Model.InterestedPartyInfo.FirstName</p>
+
+<p>Mensagens</p>
+<div>
+    @{ Html.RenderAction("RenderMails", new { id = Model.Adoption.Id }); }
+</div>
+
+@if (Model.Adoption.AdoptionStatusId == 1)
+{
+    if (Model.Adoption.PetOwnerId == Model.CurrentUserId)
+    {
+        <a href="@Url.Action("AcceptAdoption", new { id = Model.Adoption.Id })">Aceitar Proposta</a>
+    }
+    else
+    {
+        <p>Aguardando aceitação da proposta</p>
+    }
+}
+else if (Model.Adoption.AdoptionStatusId == 2)
+{
+
+    <label>Digite uma mensagem:</label>
+    <textarea></textarea>
+    <button>Enviar</button>
+
+    if (!Model.Adoption.InterestedUserPermission && !Model.Adoption.PetOwnerPermission)
+    {
+        <a href="@Url.Action("FinishAdoption", new { id = Model.Adoption.Id, userId = Model.CurrentUserId })">Finalizar Adoção</a>
+    }
+    else if (Model.Adoption.PetOwnerId == Model.CurrentUserId)
+    {
+        if (Model.Adoption.PetOwnerPermission)
+        {
+            <p>Aguardando aceite da pessoa interessada</p>
+        }
+        else
+        {
+            <p>A outra parte interessada está aguardando seu aceite </p>
+            <a href="@Url.Action("FinishAdoption", new { id = Model.Adoption.Id, userId = Model.CurrentUserId })">Finalizar Adoção</a>
+        }
+    }
+    else if (Model.Adoption.InterestedUserId == Model.CurrentUserId)
+    {
+        if (Model.Adoption.InterestedUserPermission)
+        {
+            <p>Aguardando aceite do dono do pet</p>
+        }
+        else
+        {
+            <p> A outra parte interessada está aguardando seu aceite </p>
+            <a href="@Url.Action("FinishAdoption", new { id = Model.Adoption.Id, userId = Model.CurrentUserId })">Finalizar Adoção</a>
+        }
+    }
+}
+
+<a href="@Url.Action("CancelAdoption", new { id = Model.Adoption.Id })">Cancelar Adoção</a>
+
+
+

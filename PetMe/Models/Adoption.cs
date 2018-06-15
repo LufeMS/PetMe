@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PetMe.ViewModels;
 
 namespace PetMe.Models
 {
@@ -11,9 +12,11 @@ namespace PetMe.Models
 
         public string InterestedUserId { get; set; }
         public virtual ApplicationUser InterestedUser { get; set; }
+        public bool InterestedUserPermission { get; set; }
 
         public string PetOwnerId { get; set; }
         public virtual ApplicationUser PetOwner { get; set; }
+        public bool PetOwnerPermission { get; set; }
 
         public int AnimalId { get; set; }
         public virtual Pet Animal { get; set; }
@@ -23,6 +26,7 @@ namespace PetMe.Models
 
         public DateTime AdoptionStart { get; set; }
         public DateTime? AdoptionEnd { get; set; }
+
         //Adicionar comentarios de ambas as partes e fotos
     }
 }

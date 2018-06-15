@@ -1,0 +1,12 @@
+﻿@model IEnumerable<PetMe.ViewModels.AdoptionViewModel>
+@{
+    ViewBag.Title = "AdoptionList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AdoptionList</h2>
+
+@foreach (var adoption in Model)
+{
+    <h3><a href="@Url.Action("AdoptionInfo", new { id = adoption.Adoption.Id})">@adoption.Adoption.Id</a></h3>
+}

@@ -1,0 +1,12 @@
+﻿@model List<PetMe.ViewModels.AdoptionMailViewModel>
+
+@foreach (var mail in Model)
+{
+    <label>Enviado por: @mail.SenderId</label>
+    <label>Enviado em: @mail.SentDate</label>
+    <label>Mensagem:</label>
+    <p>@mail.Text</p>
+    <label>Recebido por: @mail.ReceiverId</label>
+}
+
+

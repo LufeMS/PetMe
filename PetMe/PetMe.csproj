@@ -305,6 +305,10 @@
     <Compile Include="Migrations\201806062308411_SeedAdoptionStatus.Designer.cs">
       <DependentUpon>201806062308411_SeedAdoptionStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806150058571_BoolAdoption.cs" />
+    <Compile Include="Migrations\201806150058571_BoolAdoption.Designer.cs">
+      <DependentUpon>201806150058571_BoolAdoption.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Adoption.cs" />
@@ -448,6 +452,9 @@
     <Content Include="Views\Pets\Info.cshtml" />
     <Content Include="Views\Pets\OwnerList.cshtml" />
     <Content Include="Views\Adoptions\AdoptionConfirmation.cshtml" />
+    <Content Include="Views\Adoptions\AdoptionList.cshtml" />
+    <Content Include="Views\Adoptions\AdoptionInfo.cshtml" />
+    <Content Include="Views\Adoptions\_Mails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -528,6 +535,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806062308411_SeedAdoptionStatus.resx">
       <DependentUpon>201806062308411_SeedAdoptionStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806150058571_BoolAdoption.resx">
+      <DependentUpon>201806150058571_BoolAdoption.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
