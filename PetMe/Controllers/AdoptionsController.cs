@@ -143,7 +143,96 @@ namespace PetMe.Controllers
 
         public ActionResult AcceptAdoption(int id)
         {
+            var adoption = db.Adoptions.Find(id);
 
+            if (adoption == null)
+                return HttpNotFound();
+
+            var owner = db.Users.Find(adoption.PetOwnerId);
+            var interestedParty = db.Users.Find(adoption.InterestedUserId);
+            var pet = db.Pets.Find(adoption.AnimalId);
+
+            adoption.AdoptionStatusId = AdoptionStatus.inProgress;
+
+            db.SaveChanges();
+
+            var adoptionVM = new AdoptionViewModel
+            {
+                Adoption = adoption,
+                CurrentUserId = User.Identity.GetUserId(),
+                OwnerInfo = owner,
+                InterestedPartyInfo = interestedParty,
+                PetInfo = pet
+            };
+
+            return View("AdoptionInfo", adoptionVM);
+        }
+
+        public ActionResult FinishAdoption(int id)
+        {
+            var adoption = db.Adoptions.Find(id);
+         
+            if (adoption == null)
+                return HttpNotFound();
+
+            var owner = db.Users.Find(adoption.PetOwnerId);
+            var interestedParty = db.Users.Find(adoption.InterestedUserId);
+            var pet = db.Pets.Find(adoption.AnimalId);
+            var currentUserId = User.Identity.GetUserId();
+
+            if (adoption.InterestedUserId == currentUserId)
+                adoption.InterestedUserPermission = true;
+            
+            else if(adoption.PetOwnerId == currentUserId)
+                adoption.PetOwnerPermission = true;
+
+            if (adoption.InterestedUserPermission && adoption.PetOwnerPermission)
+            {
+                adoption.AdoptionStatusId = AdoptionStatus.finished;
+                adoption.AdoptionEnd = DateTime.Now;
+            }
+
+            db.SaveChanges();
+
+            var adoptionVM = new AdoptionViewModel
+            {
+                Adoption = adoption,
+                CurrentUserId = currentUserId,
+                OwnerInfo = owner,
+                InterestedPartyInfo = interestedParty,
+                PetInfo = pet
+            };
+
+            return View("AdoptionInfo", adoptionVM);
+        }
+
+        public ActionResult CancelAdoption(int id)
+        {
+            var adoption = db.Adoptions.Find(id);
+
+            if (adoption == null)
+                return HttpNotFound();
+
+            var owner = db.Users.Find(adoption.PetOwnerId);
+            var interestedParty = db.Users.Find(adoption.InterestedUserId);
+            var pet = db.Pets.Find(adoption.AnimalId);
+            var currentUserId = User.Identity.GetUserId();
+
+            adoption.AdoptionStatusId = AdoptionStatus.cancelled;
+            adoption.AdoptionEnd = DateTime.Now;
+
+            db.SaveChanges();
+
+            var adoptionVM = new AdoptionViewModel
+            {
+                Adoption = adoption,
+                CurrentUserId = currentUserId,
+                OwnerInfo = owner,
+                InterestedPartyInfo = interestedParty,
+                PetInfo = pet
+            };
+            
+            return View("AdoptionInfo", adoptionVM);
         }
     }
 }

@@ -19,12 +19,13 @@
 {
     if (Model.Adoption.PetOwnerId == Model.CurrentUserId)
     {
-        <a href="@Url.Action("AcceptAdoption", new { id = Model.Adoption.Id })">Aceitar Proposta</a>
+        <a href="@Url.Action("AcceptAdoption", new { id = Model.Adoption.Id, adoptionVM = Model })">Aceitar Proposta</a>
     }
     else
     {
         <p>Aguardando aceitação da proposta</p>
     }
+    <a href="@Url.Action("CancelAdoption", new { id = Model.Adoption.Id })">Cancelar Adoção</a>
 }
 else if (Model.Adoption.AdoptionStatusId == 2)
 {
@@ -37,33 +38,43 @@ else if (Model.Adoption.AdoptionStatusId == 2)
     {
         <a href="@Url.Action("FinishAdoption", new { id = Model.Adoption.Id, userId = Model.CurrentUserId })">Finalizar Adoção</a>
     }
+
     else if (Model.Adoption.PetOwnerId == Model.CurrentUserId)
     {
-        if (Model.Adoption.PetOwnerPermission)
+        if (Model.Adoption.PetOwnerPermission && !Model.Adoption.InterestedUserPermission)
         {
             <p>Aguardando aceite da pessoa interessada</p>
         }
         else
         {
             <p>A outra parte interessada está aguardando seu aceite </p>
-            <a href="@Url.Action("FinishAdoption", new { id = Model.Adoption.Id, userId = Model.CurrentUserId })">Finalizar Adoção</a>
+            <a href="@Url.Action("FinishAdoption", new { id = Model.Adoption.Id })">Finalizar Adoção</a>
         }
     }
+
     else if (Model.Adoption.InterestedUserId == Model.CurrentUserId)
     {
-        if (Model.Adoption.InterestedUserPermission)
+        if (Model.Adoption.InterestedUserPermission && !Model.Adoption.PetOwnerPermission)
         {
             <p>Aguardando aceite do dono do pet</p>
         }
         else
         {
             <p> A outra parte interessada está aguardando seu aceite </p>
-            <a href="@Url.Action("FinishAdoption", new { id = Model.Adoption.Id, userId = Model.CurrentUserId })">Finalizar Adoção</a>
+            <a href="@Url.Action("FinishAdoption", new { id = Model.Adoption.Id })">Finalizar Adoção</a>
         }
     }
+    <a href="@Url.Action("CancelAdoption", new { id = Model.Adoption.Id })">Cancelar Adoção</a>
+}
+else if (Model.Adoption.AdoptionStatusId == 3)
+{
+    <p>Essa adoção foi finalizada</p>
+}
+else if (Model.Adoption.AdoptionStatusId == 4)
+{
+    <p>Essa adoção foi cancelada</p>
 }
 
-<a href="@Url.Action("CancelAdoption", new { id = Model.Adoption.Id })">Cancelar Adoção</a>
 
 
 
