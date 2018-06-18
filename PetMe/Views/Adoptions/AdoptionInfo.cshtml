@@ -11,7 +11,7 @@
 <p>Pessoa Interessada: @Model.InterestedPartyInfo.FirstName</p>
 
 <p>Mensagens</p>
-<div>
+<div id="mails">
     @{ Html.RenderAction("RenderMails", new { id = Model.Adoption.Id }); }
 </div>
 
@@ -30,9 +30,11 @@
 else if (Model.Adoption.AdoptionStatusId == 2)
 {
 
-    <label>Digite uma mensagem:</label>
-    <textarea></textarea>
-    <button>Enviar</button>
+    <div id="message-box">
+        <label>Digite uma mensagem:</label>
+        <textarea id="text"></textarea>
+        <button id="enviar-mensagem">Enviar</button>
+    </div>
 
     if (!Model.Adoption.InterestedUserPermission && !Model.Adoption.PetOwnerPermission)
     {
@@ -43,12 +45,13 @@ else if (Model.Adoption.AdoptionStatusId == 2)
     {
         if (Model.Adoption.PetOwnerPermission && !Model.Adoption.InterestedUserPermission)
         {
-            <p>Aguardando aceite da pessoa interessada</p>
+            <p> Aguardando aceite da pessoa interessada</p>
         }
         else
         {
-            <p>A outra parte interessada está aguardando seu aceite </p>
-            <a href="@Url.Action("FinishAdoption", new { id = Model.Adoption.Id })">Finalizar Adoção</a>
+            <p>A outra parte interessada está aguardando seu aceite</p>
+
+            <a href="@Url.Action("FinishAdoption", new { id = Model.Adoption.Id })"> Finalizar Adoção </a>
         }
     }
 
@@ -60,7 +63,8 @@ else if (Model.Adoption.AdoptionStatusId == 2)
         }
         else
         {
-            <p> A outra parte interessada está aguardando seu aceite </p>
+            <p>A outra parte interessada está aguardando seu aceite </p>
+
             <a href="@Url.Action("FinishAdoption", new { id = Model.Adoption.Id })">Finalizar Adoção</a>
         }
     }
@@ -73,6 +77,34 @@ else if (Model.Adoption.AdoptionStatusId == 3)
 else if (Model.Adoption.AdoptionStatusId == 4)
 {
     <p>Essa adoção foi cancelada</p>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#message-box").on("click", "button#enviar-mensagem", function () {
+
+                var mensagem = {
+                    text: $("#text").val(),
+                    adoptionId: @Model.Adoption.Id,
+                    petOwnerId: "@Model.OwnerInfo.Id",
+                    interestedPartyId: "@Model.InterestedPartyInfo.Id",
+                    currentUserId: "@Model.CurrentUserId"
+                };
+
+                $.ajax({
+                    url: "@Url.Action("SendMessage", "Adoptions")",
+                    type: "get",
+                    data: mensagem,
+                    success: function (result) {
+                        $("#mails").html(result);
+                        $("#text").val("");
+                    }
+                });
+            });
+        });
+    </script>
 }
 
 

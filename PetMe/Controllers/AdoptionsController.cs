@@ -234,5 +234,38 @@ namespace PetMe.Controllers
             
             return View("AdoptionInfo", adoptionVM);
         }
+
+        public ActionResult SendMessage(string text, string petOwnerId, string interestedPartyId, string currentUserId, int adoptionId)
+        {
+            string receiverId, senderId;
+
+            if (interestedPartyId == currentUserId)
+            {
+                receiverId = petOwnerId;
+                senderId = interestedPartyId;
+            }
+            else
+            {
+                receiverId = interestedPartyId;
+                senderId = petOwnerId;
+            }
+
+            if (!String.IsNullOrEmpty(text))
+            {
+                var message = new AdoptionMail
+                {
+                    AdoptionId = adoptionId,
+                    ReceiverId = receiverId,
+                    SenderId = senderId,
+                    SentDate = DateTime.Now,
+                    Text = text
+                };
+
+                db.AdoptionMails.Add(message);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("RenderMails", new { id = adoptionId});
+        }
     }
 }
