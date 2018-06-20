@@ -35,7 +35,7 @@ namespace PetMe.Controllers
             userViewModel.Genders = db.UserGenders.ToList();
 
             if (state != null)
-                userViewModel.StateView = state.Name;
+                userViewModel.StateView = state.Abbreviation;
 
             if (county != null)
                 userViewModel.CountyView = county.Name;
@@ -53,7 +53,7 @@ namespace PetMe.Controllers
             if (user == null)
                 return HttpNotFound();
 
-            var state = db.States.Single(s => s.Name.Equals(userViewModel.StateView));
+            var state = db.States.Single(s => s.Abbreviation.Equals(userViewModel.StateView));
             var county = db.Counties.Single(s => s.Name.Equals(userViewModel.CountyView));
 
             Mapper.Map(userViewModel, user);
