@@ -4,42 +4,32 @@
     ViewBag.Title = "Efetuar login";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
+<div>
+    <div>
         <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @style = "margin-left: 20%; margin-right: 20%; margin-top: 8%; text-align:center", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Usar uma conta local para efetuar login.</h4>
-                <hr />
+                <h1 style="padding-bottom: 1rem;">PetMe - Logo</h1>
+
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+
+                <div class="form-group" style="margin-left: 30%; margin-right: 30%">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Username" })
+                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group" style="margin-left: 30%; margin-right: 30%;">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group form-check">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input" })
+                        @Html.LabelFor(m => m.RememberMe, new { @class = "form-check-label" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Efetuar login" class="btn btn-default" />
-                    </div>
+                    <input type="submit" value="Efetuar login" class="btn btn-primary" />
                 </div>
                 <p>
                     @Html.ActionLink("Registrar-se como novo usuário", "Register")
@@ -51,11 +41,15 @@
             }
         </section>
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
+    <div style="margin-left: 20%; margin-right: 20%; text-align:center">
+        <p>Ou se preferir</p>
+        <button type="submit" class="btn btn-primary" style="background-color: #3b5998!important">Login via Facebook</button>
     </div>
+    @*<div class="col-md-4">
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>*@
 </div>
 
 @section Scripts {

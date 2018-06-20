@@ -2,30 +2,111 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div id="initialCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#initialCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#initialCarousel" data-slide-to="1"></li>
+        <li data-target="#initialCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="~/Resources/300x72.jpg" alt="First slide">
+            <div class="carousel-caption text-left d-none d-md-block">
+                <h1>Venha Conferir</h1>
+                <p>Milhões de animais cadastrados, encontre o seu!</p>
+                <p>
+                    <a class="btn btn-lg btn-primary" href="#" role="button">Visualizar Pets</a>
+                </p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="~/Resources/300x72.jpg" alt="Second slide">
+            <div class="carousel-caption text-left d-none d-md-block">
+                <h1>Cadastre-se agora mesmo</h1>
+                <p>Se ainda não tiver cadastro, começe agora pra aproveitar todos os itens do site</p>
+                <p>
+                    <a class="btn btn-lg btn-primary" href="#" role="button">Cadastre-se</a>
+                </p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="~/Resources/300x72.jpg" alt="Third slide">
+            <div class="carousel-caption text-left d-none d-md-block">
+                <h1>Parceiros Incríveis</h1>
+                <p>Temos os melhores parceiros pra garantir a melhor experiência</p>
+                <p>
+                    <a class="btn btn-lg btn-primary" href="#" role="button">Saiba Mais</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#initialCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#initialCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
 </div>
+</br>
+<div class="container marketing">
+    <div class="row">
+        <div class="col-lg-4" style="text-align: center">
+            <svg class="rounded-circle" xmlns="http://www.w3.org/2000/svg" viewBox="-150 0 750 500" alt="Generic placeholder image" width="140" height="140"><path d="M128 148v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12zm140 12h40c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12zm-128 96h40c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12zm128 0h40c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12zm-76 84v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm76 12h40c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12zm180 124v36H0v-36c0-6.6 5.4-12 12-12h19.5V24c0-13.3 10.7-24 24-24h337c13.3 0 24 10.7 24 24v440H436c6.6 0 12 5.4 12 12zM79.5 463H192v-67c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v67h112.5V49L80 48l-.5 415z" /></svg>
+            <h2>Lares de verdade</h2>
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+            <!-- <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p> -->
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4" style="text-align: center">
+            <svg class="rounded-circle" xmlns="http://www.w3.org/2000/svg" viewBox="-90 0 750 500" alt="Generic placeholder image" width="140" height="140"><path d="M519.2 127.9l-47.6-47.6A56.252 56.252 0 0 0 432 64H205.2c-14.8 0-29.1 5.9-39.6 16.3L118 127.9H0v255.7h64c17.6 0 31.8-14.2 31.9-31.7h9.1l84.6 76.4c30.9 25.1 73.8 25.7 105.6 3.8 12.5 10.8 26 15.9 41.1 15.9 18.2 0 35.3-7.4 48.8-24 22.1 8.7 48.2 2.6 64-16.8l26.2-32.3c5.6-6.9 9.1-14.8 10.9-23h57.9c.1 17.5 14.4 31.7 31.9 31.7h64V127.9H519.2zM48 351.6c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16c0 8.9-7.2 16-16 16zm390-6.9l-26.1 32.2c-2.8 3.4-7.8 4-11.3 1.2l-23.9-19.4-30 36.5c-6 7.3-15 4.8-18 2.4l-36.8-31.5-15.6 19.2c-13.9 17.1-39.2 19.7-55.3 6.6l-97.3-88H96V175.8h41.9l61.7-61.6c2-.8 3.7-1.5 5.7-2.3H262l-38.7 35.5c-29.4 26.9-31.1 72.3-4.4 101.3 14.8 16.2 61.2 41.2 101.5 4.4l8.2-7.5 108.2 87.8c3.4 2.8 3.9 7.9 1.2 11.3zm106-40.8h-69.2c-2.3-2.8-4.9-5.4-7.7-7.7l-102.7-83.4 12.5-11.4c6.5-6 7-16.1 1-22.6L367 167.1c-6-6.5-16.1-6.9-22.6-1l-55.2 50.6c-9.5 8.7-25.7 9.4-34.6 0-9.3-9.9-8.5-25.1 1.2-33.9l65.6-60.1c7.4-6.8 17-10.5 27-10.5l83.7-.2c2.1 0 4.1.8 5.5 2.3l61.7 61.6H544v128zm48 47.7c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16c0 8.9-7.2 16-16 16z" /></svg>
+            <h2>Parceiros Confiaveis</h2>
+            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+            <!-- <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p> -->
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4" style="text-align: center">
+            <svg class="rounded-circle" xmlns="http://www.w3.org/2000/svg" viewBox="-150 0 750 500" alt="Generic placeholder image" width="140" height="140"><path d="M85.231 330.958C36 330.958 0 273.792 0 231.5c0-28.292 16-58.042 49.538-58.042 49.231 0 85.231 57.458 85.231 99.75 0 28.292-15.692 57.75-49.538 57.75zm348 106.167c0 37.042-32 42.875-63.385 42.875-41.231 0-74.462-26.25-113.846-26.25-41.231 0-76.308 25.958-120.923 25.958-29.847 0-56.308-9.625-56.308-42.583C78.769 368 180.616 265.333 256 265.333s177.231 102.959 177.231 171.792zM182.462 203.792c-49.847 0-80-59.5-80-100.333C102.462 70.792 120.308 32 160 32c50.154 0 80 59.5 80 100.333 0 32.667-17.846 71.459-57.538 71.459zM272 132.333C272 91.5 301.846 32 352 32c39.692 0 57.539 38.792 57.539 71.458 0 40.833-30.154 100.333-80.001 100.333C289.846 203.792 272 165 272 132.333zM512 231.5c0 42.292-36 99.458-85.231 99.458-33.847 0-49.538-29.458-49.538-57.75 0-42.291 35.999-99.75 85.231-99.75C496 173.458 512 203.208 512 231.5z" /></svg>
+            <h2>Alegria pra casa toda</h2>
+            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo.</p>
+            <!-- <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p> -->
+        </div>
+    </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="~/Resources/500x500.jpg" data-holder-rendered="true" style="width: 500px; height: 500px;">
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        </div>
+        <div class="col-md-5 order-md-1">
+            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="~/Resources/500x500.jpg" data-holder-rendered="true" style="width: 500px; height: 500px;">
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="~/Resources/500x500.jpg" data-holder-rendered="true" style="width: 500px; height: 500px;">
+        </div>
     </div>
 </div>

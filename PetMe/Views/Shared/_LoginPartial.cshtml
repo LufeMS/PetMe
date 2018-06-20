@@ -3,20 +3,30 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Olá " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Fazer logoff</a></li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right" style="margin-right:2.5rem;">
+            <li class="nav-item dropdown">
+                <a class="nav-link a-yellow dropdown-toggle" data-toggle="dropdown" href="#" id="profileDropdown">
+                    Olá @User.Identity.GetUserName()!
+                </a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-content">
+                        <a class="dropdown-item" href="@Url.Action("MyProfile", "Profile")">Meu Perfil</a>
+                        <a class="dropdown-item" href="@Url.Action("PetOwnerList", "Pets")">Meus Pets</a>
+                        <a class="dropdown-item" href="@Url.Action("MyAdoptions", "Adoptions")">Adoções</a>
+                        <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Sair</a>
+                    </div>
+                </div>
+                @*@Html.ActionLink("Olá " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class="nav-link a-yellow" })*@
+            </li>
+        </ul>
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Registre-se", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Logon", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Entrar", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-outline-success-nav-yellow my-2 my-sm-0" })</li>
+            <li>@Html.ActionLink("Registre-se", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-outline-success-nav-yellow my-2 my-sm-0", @style = "margin-left: 8px" })</li>
+        </ul>
 }

@@ -351,6 +351,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\300x72.jpg" />
+    <Content Include="Resources\500x500.jpg" />
+    <Content Include="Resources\blank-profile-picture.png" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
