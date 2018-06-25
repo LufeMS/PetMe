@@ -168,6 +168,45 @@ namespace PetMe.Controllers
             return View("AdoptionInfo", adoptionVM);
         }
 
+        public ActionResult StartTransfer(int id)
+        {
+            var adoption = db.Adoptions.Find(id);
+
+            if (adoption == null)
+                return HttpNotFound();
+
+            var owner = db.Users.Find(adoption.PetOwnerId);
+            var interestedParty = db.Users.Find(adoption.InterestedUserId);
+            var pet = db.Pets.Find(adoption.AnimalId);
+            var currentUserId = User.Identity.GetUserId();
+
+            if (adoption.InterestedUserId == currentUserId)
+                adoption.InterestedUserPermission = true;
+
+            else if (adoption.PetOwnerId == currentUserId)
+                adoption.PetOwnerPermission = true;
+
+            if (adoption.InterestedUserPermission && adoption.PetOwnerPermission)
+            {
+                adoption.AdoptionStatusId = AdoptionStatus.awaitingTransfer;
+                adoption.InterestedUserPermission = false;
+                adoption.PetOwnerPermission = false;
+            }
+
+            db.SaveChanges();
+
+            var adoptionVM = new AdoptionViewModel
+            {
+                Adoption = adoption,
+                CurrentUserId = currentUserId,
+                OwnerInfo = owner,
+                InterestedPartyInfo = interestedParty,
+                PetInfo = pet
+            };
+
+            return View("AdoptionInfo", adoptionVM);
+        }
+
         public ActionResult FinishAdoption(int id)
         {
             var adoption = db.Adoptions.Find(id);

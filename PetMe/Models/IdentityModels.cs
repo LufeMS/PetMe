@@ -20,7 +20,7 @@ namespace PetMe.Models
         * Adicionar avatar
         */
 
-        //public byte[] Avatar { get; set; }
+        public byte[] Avatar { get; set; }
 
         [MaxLength(35)]
         public string FirstName { get; set; }
@@ -82,6 +82,7 @@ namespace PetMe.Models
         public DbSet<Adoption> Adoptions { get; set; }
         public DbSet<AdoptionMail> AdoptionMails { get; set; }
         public DbSet<AdoptionStatus> AdoptionStatus { get; set; }
+        public DbSet<PetPicture> PetPictures { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

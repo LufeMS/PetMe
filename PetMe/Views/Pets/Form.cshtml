@@ -1,132 +1,240 @@
 ﻿@model PetMe.ViewModels.PetFormViewModel
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "PetForm";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "PetForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>PetForm</h2>
+<div class="container">
+    @using (Html.BeginForm("SalvarPet", "Pets", FormMethod.Post, new { @style = "margin-left: 26%; text-align:center", @id = "pet-form", enctype = "multipart/form-data" }))
+    {
+        
+    <div class="py-5 text-center">
+        <div id="imgCarousel" class="carousel slide" style="border-radius: 50%; margin-left: 33%; margin-right: 33%" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#imgCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#imgCarousel" data-slide-to="1"></li>
+                <li data-target="#imgCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <a href="#">
+                                <img class="" src="~/Resources/500x500.jpg" alt="First slide">
+                            </a>
+                        </div>
+                        <div class="col-xs-4">
+                            <a href="#">
+                                <img class="" src="~/Resources/500x500.jpg" alt="First slide">
+                            </a>
+                        </div>
+                        <div class="col-xs-4">
+                            <a href="#">
+                                <img class="" src="~/Resources/500x500.jpg" alt="First slide">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <a href="#">
+                                <img class="" src="~/Resources/500x500.jpg" alt="First slide">
+                            </a>
+                        </div>
+                        <div class="col-xs-4">
+                            <a href="#">
+                                <img class="" src="~/Resources/500x500.jpg" alt="First slide">
+                            </a>
+                        </div>
+                        <div class="col-xs-4">
+                            <a href="#">
+                                <img class="" src="~/Resources/500x500.jpg" alt="First slide">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <a href="#">
+                                <img class="" src="~/Resources/500x500.jpg" alt="First slide">
+                            </a>
+                        </div>
+                        <div class="col-xs-4">
+                            <a href="#">
+                                <img class="" src="~/Resources/500x500.jpg" alt="First slide">
+                            </a>
+                        </div>
+                        <div class="col-xs-4">
+                            <a href="#">
+                                <img class="" src="~/Resources/500x500.jpg" alt="First slide">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#imgCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#imgCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <p class="lead">Below is an description of the pet.</p>
+    </div>
+        
+        
+        
+        @Html.TextBoxFor(m => m.Pictures, new { @type = "file", @multiple = "multiple" })
 
-@using (Html.BeginForm("SalvarPet", "Pets"))
-{
-    <div class="form-group">
-        @Html.LabelFor(p => p.Name)
-        @Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.Name)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.AgeInMonths)
-        @Html.TextBoxFor(p => p.AgeInMonths, new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.AgeInMonths)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.PetTypeId)
-        @Html.DropDownListFor(p => p.PetTypeId, new SelectList(Model.PetTypes, "Id", "Name"), "Selecione o tipo de animal", new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.PetTypeId)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.PetBreedTypeId)
-        @Html.DropDownListFor(p => p.PetBreedTypeId, new SelectList(Model.PetBreedTypes, "Id", "Name"), "Selecione o tipo de raça", new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.PetBreedTypeId)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.BreedDetail)
-        @Html.TextBoxFor(p => p.BreedDetail, new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.Color)
-        @Html.TextBoxFor(p => p.Color, new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.Color)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.PetSizeId)
-        @Html.DropDownListFor(p => p.PetSizeId, new SelectList(Model.PetSizes, "Id", "Name"), "Selecione o porte do pet", new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.PetSizeId)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.PetGenderId)
-        @Html.DropDownListFor(p => p.PetGenderId, new SelectList(Model.PetGenders, "Id", "Name"), "Selecione o sexo do pet", new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.PetGenderId)
-    </div>
-    <div class="custom-checkbox">
-        <label>
-            @Html.CheckBoxFor(p => p.Vaccinated) Vacinado?
-        </label>
-    </div>
-    <div class="custom-checkbox">
-        <label>
-            @Html.CheckBoxFor(p => p.Castrated) Castrado?
-        </label>
-    </div>
-    <div class="custom-checkbox">
-        <label>
-            @Html.CheckBoxFor(p => p.Trained) Adestrado?
-        </label>
-    </div>
-    <div class="custom-checkbox">
-        <label>
-            @Html.CheckBoxFor(p => p.SpecialCare) Cuidados Especiais?
-        </label>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.DetailsSCare)
-        @Html.TextAreaFor(p => p.DetailsSCare, new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.DetailsSCare)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.Description)
-        @Html.TextAreaFor(p => p.Description, new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.Description)
-    </div>
-    <div class="custom-checkbox">
-        <label>
-            @Html.CheckBoxFor(p => p.LivesWithOwner) Vive no mesmo endereço que o dono?
-        </label>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.ZipCode)
-        @Html.TextAreaFor(p => p.ZipCode, new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.ZipCode)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.Address)
-        @Html.TextAreaFor(p => p.Address, new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.Address)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.AddressNumber)
-        @Html.TextAreaFor(p => p.AddressNumber, new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.AddressNumber)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.AddressComplement)
-        @Html.TextAreaFor(p => p.AddressComplement, new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.CountyView)
-        @Html.TextAreaFor(p => p.CountyView, new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.CountyView)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(p => p.StateView)
-        @Html.TextAreaFor(p => p.StateView, new { @class = "form-control" })
-        @Html.ValidationMessageFor(p => p.StateView)
-    </div>
-    @*@Html.AntiForgeryToken()*@
-    @Html.HiddenFor(p => p.Id)
-    @Html.HiddenFor(p => p.OwnerId)
-    <button class="btn btn-primary" type="submit">Salvar</button>
+        <div class="row">
+            <div class="col-md-8 order-md-1">
+                <h4 class="mb-3">Informações do Pet</h4>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        @Html.TextBoxFor(p => p.Name, new { @class = "form-control", @placeholder = "Nome do Pet" })
+                        @Html.ValidationMessageFor(p => p.Name)
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        @Html.TextBoxFor(p => p.AgeInMonths, new { @class = "form-control", @placeholder = "Idade (em meses)" })
+                        @Html.ValidationMessageFor(p => p.AgeInMonths)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=" col-md-6 mb-3">
+                        @Html.DropDownListFor(p => p.PetTypeId, new SelectList(Model.PetTypes, "Id", "Name"), "Selecione o tipo de animal", new { @class = "form-control custom-select d-block w-100" })
+                        @Html.ValidationMessageFor(p => p.PetTypeId)
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        @Html.DropDownListFor(p => p.PetBreedTypeId, new SelectList(Model.PetBreedTypes, "Id", "Name"), "Selecione o tipo de raça", new { @class = "form-control custom-select d-block w-100" })
+                        @Html.ValidationMessageFor(p => p.PetBreedTypeId)
+                    </div>
+                </div>
+                <div class="mb-3">
+                    @Html.TextBoxFor(p => p.BreedDetail, new { @class = "form-control", @placeholder = "Detalhes da raça (Opcional)" })
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        @Html.TextBoxFor(p => p.Color, new { @class = "form-control", @placeholder = "Cor (Opcional)" })
+                        @Html.ValidationMessageFor(p => p.Color)
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        @Html.DropDownListFor(p => p.PetSizeId, new SelectList(Model.PetSizes, "Id", "Name"), "Selecione o porte do pet", new { @class = "form-control custom-select d-block w-100" })
+                        @Html.ValidationMessageFor(p => p.PetSizeId)
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        @Html.DropDownListFor(p => p.PetGenderId, new SelectList(Model.PetGenders, "Id", "Name"), "Selecione o sexo do pet", new { @class = "form-control custom-select d-block w-100" })
+                        @Html.ValidationMessageFor(p => p.PetGenderId)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="custom-checkbox col-md-4 mb-3">
+                        <label>
+                            @Html.CheckBoxFor(p => p.Vaccinated) Vacinado?
+                        </label>
+                    </div>
+                    <div class="custom-checkbox col-md-4 mb-3">
+                        <label>
+                            @Html.CheckBoxFor(p => p.Castrated) Castrado?
+                        </label>
+                    </div>
+                    <div class="custom-checkbox col-md-4 mb-3">
+                        <label>
+                            @Html.CheckBoxFor(p => p.Trained) Adestrado?
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="custom-checkbox col-md-4 mb-3">
+                        <label>
+                            @Html.CheckBoxFor(p => p.SpecialCare) Cuidados Especiais?
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    @Html.TextAreaFor(p => p.DetailsSCare, new { @class = "form-control", @placeholder = "Descrição dos cuidados especiais (Opcional)" })
+                    @Html.ValidationMessageFor(p => p.DetailsSCare)
+                </div>
+                <div class="mb-3">
+                    @Html.TextAreaFor(p => p.Description, new { @class = "form-control", @placeholder = "Conte-nos mais sobre seu Pet (Opcional)" })
+                    @Html.ValidationMessageFor(p => p.Description)
+                </div>
+                <div class="custom-checkbox">
+                    <label>
+                        @Html.CheckBoxFor(p => p.LivesWithOwner) Vive no mesmo endereço que o dono?
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        @Html.TextAreaFor(p => p.ZipCode, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(p => p.ZipCode)
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <button type="submit" class="btn btn-primary btn-block">Buscar Cep</button>
+                    </div>
+                </div>
 
-    @*@if(Model.Id != 0) {
-            <button id="js-delete" data-pet-id="@Model.Id" class="btn btn-secondary">Excluir</button>
-        }*@
-}
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <div class="form-group">
+                            @Html.TextAreaFor(p => p.Address, new { @class = "form-control", @placeholder = "Endereço" })
+                            @Html.ValidationMessageFor(p => p.Address)
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            @Html.TextAreaFor(p => p.AddressNumber, new { @class = "form-control", @placeholder = "Número" })
+                            @Html.ValidationMessageFor(p => p.AddressNumber)
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        @Html.TextAreaFor(p => p.AddressComplement, new { @class = "form-control", @placeholder = "Complemento (Opcional)" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 mb-3">
+                        @Html.TextBoxFor(u => u.CountyView, new { @class = "form-control", @placeholder = "Cidade", @id = "cidade" })
+                        @Html.ValidationMessageFor(u => u.CountyView)
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        @Html.TextBoxFor(u => u.StateView, new { @class = "form-control", @placeholder = "UF", @id = "uf" })
+                        @Html.ValidationMessageFor(u => u.StateView)
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*@Html.AntiForgeryToken()*@
+        @Html.HiddenFor(p => p.Id)
+        @Html.HiddenFor(p => p.OwnerId)
+        <button class="btn btn-primary" type="submit">Salvar</button>
+
+        if (Model.Id != 0)
+        {
+            <a id="js-delete" data-pet-id="@Model.Id" class="btn btn-secondary">Excluir</a>
+        }
+    }
+</div>
 
 @section scripts
 {
     <script>
         $(document).ready(function () {
+
+            $('#myCarousel').carousel({
+                interval: 10000
+            })
+
+            $('#myCarousel').on('slid.bs.carousel', function () {
+                //alert("slid");
+            });
+
             $("#pet-form").on("click", "#js-delete", function () {
                 var button = $(this);
 
@@ -136,10 +244,10 @@
                             url: "/api/pets/" + button.attr("data-pet-id"),
                             method: "DELETE",
                             succes: function () {
-                                toastr.success("Rentals sucessfully recorded!");
+                                toastr.success("Pet excluido com sucesso!");
                             },
                             complete: function (data) {
-                                window.location.href = "@Url.Action("PetList", "Panel")"
+                                window.location.href = "@Url.Action("PetOwnerList")"
                             }
                         });
                     }

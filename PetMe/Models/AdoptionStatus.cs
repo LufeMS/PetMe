@@ -18,6 +18,7 @@ namespace PetMe.Models
         public const int inProgress = 2;
         public const int finished = 3;
         public const int cancelled = 4;
+        public const int awaitingTransfer = 5;
 
     }
 }

@@ -43,7 +43,7 @@ namespace PetMe.Controllers
             return View("Info", userViewModel);
         }
 
-        public ActionResult SaveUser(UserProfileViewModel userViewModel)
+        public ActionResult SaveUser(UserProfileViewModel userViewModel, HttpPostedFileBase avatarUpload)
         {
             if (!ModelState.IsValid)
                 return View("Info", userViewModel);
@@ -53,15 +53,21 @@ namespace PetMe.Controllers
             if (user == null)
                 return HttpNotFound();
 
+            if (avatarUpload != null && avatarUpload.ContentLength > 0)
+            {
+                userViewModel.Avatar = new byte[avatarUpload.ContentLength];
+                avatarUpload.InputStream.Read(userViewModel.Avatar, 0, avatarUpload.ContentLength);
+            }
+
             var state = db.States.Single(s => s.Abbreviation.Equals(userViewModel.StateView));
             var county = db.Counties.Single(s => s.Name.Equals(userViewModel.CountyView));
 
             Mapper.Map(userViewModel, user);
-            user.StateId = state.Id;
+            user.StateId = state.Id;    
             user.CountyId = county.Id;
             user.FormOk = true;
             user.Deleted = false;
-
+            
             db.SaveChanges();
 
             userViewModel.Genders = db.UserGenders.ToList();

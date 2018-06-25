@@ -163,9 +163,7 @@ namespace PetMe.Controllers
             var petSizes = db.PetSizes.ToList();
             var petTypes = db.PetTypes.ToList();
             var petGenders = db.PetGenders.ToList();
-            //var counties = db.Counties.ToList();
-            //var states = db.States.ToList();
-            
+
             if (id == null)
             {
                 petViewModel = new PetFormViewModel
@@ -182,11 +180,21 @@ namespace PetMe.Controllers
 
             pet = db.Pets.Find(id);
 
+            if (pet == null)
+                return HttpNotFound();
+
+            var county = db.Counties.Find(pet.CountyId);
+            var state = db.States.Find(pet.StateId);
+            var petPictures = db.PetPictures.Where(pp => pp.PetId == pet.Id).ToList();
+
             Mapper.Map(pet, petViewModel);
             petViewModel.PetTypes = petTypes;
             petViewModel.PetSizes = petSizes;
             petViewModel.PetBreedTypes = petBreedTypes;
             petViewModel.PetGenders = petGenders;
+            petViewModel.CountyView = county.Name;
+            petViewModel.StateView = state.Abbreviation;
+            petViewModel.PetPictures = petPictures;
 
             return View("Form", petViewModel);
         }
@@ -257,6 +265,19 @@ namespace PetMe.Controllers
             };
 
             return View("Info", petViewModel);
+        }
+
+        public ActionResult DeletePet(int id)
+        {
+            var pet = db.Pets.Find(id);
+
+            if (pet == null)
+                return HttpNotFound();
+
+            db.Pets.Remove(pet);
+            db.SaveChanges();
+
+            return RedirectToAction("PetOwnerList");
         }
     }
 }

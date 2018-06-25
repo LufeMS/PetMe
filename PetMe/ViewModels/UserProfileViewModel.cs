@@ -9,6 +9,7 @@ namespace PetMe.ViewModels
 {
     public class UserProfileViewModel
     {
+
         public string Id { get; set; }
 
         [Display(Name = "Username")]

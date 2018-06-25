@@ -11,5 +11,6 @@ namespace PetMe.ViewModels
         public ApplicationUser UserInfo { get; set; }
         public Pet PetInfo { get; set; }
         public ApplicationUser OwnerInfo { get; set; }
+        public List<PetPicture> PetPictures { get; set; }
     }
 }

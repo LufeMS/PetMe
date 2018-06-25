@@ -5,13 +5,28 @@
 }
 
 <div class="container">
-    <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="~/Resources/blank-profile-picture.png" alt="" width="85" height="85">
-        <h2>@Model.UserName (@Model.Email)</h2>
-    </div>
 
-    @using (Html.BeginForm("SaveUser", "Profile", FormMethod.Post, htmlAttributes: new { @style = "margin-left: 26%; text-align:center" }))
+    @using (Html.BeginForm("SaveUser", "Profile", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data", @style = "margin-left: 26%; text-align:center" }))
     {
+        <div class="py-5 text-center">
+
+            @if (Model.Avatar != null && Model.Avatar.LongLength > 0)
+            {
+                var base64 = Convert.ToBase64String(Model.Avatar);
+                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+
+                <img src='@imgsrc' class="d-block mx-auto mb-4" alt="" width="85" height="85" />
+            }
+            else
+            {
+                <img src="~/Resources/blank-profile-picture.png" class="d-block mx-auto mb-4" alt="" width="85" height="85" />
+
+            }
+
+            <input type="file" name="avatarUpload" id="avatarUpload" />
+            <h2>@Model.UserName (@Model.Email)</h2>
+        </div>
+
         @Html.HiddenFor(u => u.UserName)
         @Html.HiddenFor(u => u.Email)
 

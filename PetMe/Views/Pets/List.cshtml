@@ -4,83 +4,116 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>PetList</h2>
+<div class="row" style="max-width: 100%; max-height: 100%">
 
-@using (Html.BeginForm("Filter", "Pets"))
-{
-    <div class="form-group">
-        @Html.LabelFor(f => f.Filter.CountyId)
-        @Html.DropDownListFor(f => f.Filter.CountyId, new SelectList(Model.Filter.Counties, "Id", "Name"), "Selecione um Município", new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(f => f.Filter.StateId)
-        @Html.DropDownListFor(f => f.Filter.StateId, new SelectList(Model.Filter.States, "Id", "Name"), "Selecione um Estado", new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(f => f.Filter.PetSizeId)
-        @Html.DropDownListFor(f => f.Filter.PetSizeId, new SelectList(Model.Filter.PetSizes, "Id", "Name"), "Selecione um Porte", new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(f => f.Filter.PetTypeId)
-        @Html.DropDownListFor(f => f.Filter.PetTypeId, new SelectList(Model.Filter.PetTypes, "Id", "Name"), "Selecione um Tipo de Animal", new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(f => f.Filter.PetGenderId)
-        @Html.DropDownListFor(f => f.Filter.PetGenderId, new SelectList(Model.Filter.PetGenders, "Id", "Name"), "Selecione um Sexo", new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(f => f.Filter.PetBreedTypeId)
-        @Html.DropDownListFor(f => f.Filter.PetBreedTypeId, new SelectList(Model.Filter.PetBreedTypes, "Id", "Name"), "Selecione a Raça", new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.EnumDropDownListFor(f => f.Filter.AgeRange, "Selecione a idade do pet", new { @class = "form-control" })
-    </div>
-    <div class="custom-checkbox">
-        <label>
-            @Html.CheckBoxFor(f => f.Filter.Vaccinated) Vacinado?
-        </label>
-    </div>
-    <div class="custom-checkbox">
-        <label>
-            @Html.CheckBoxFor(f => f.Filter.Trained) Adestrado?
-        </label>
-    </div>
-    <div class="custom-checkbox">
-        <label>
-            @Html.CheckBoxFor(f => f.Filter.Castrated) Castrado?
-        </label>
-    </div>
-    <div class="custom-checkbox">
-        <label>
-            @Html.CheckBoxFor(f => f.Filter.SpecialCare) Cuidados Especiais?
-        </label>
-    </div>
-    <button class="btn btn-primary" type="submit">Filtrar</button>
-}
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar " style="padding-top: 0px;">
 
-@if (!Model.Pets.Any())
-{
-    <h1>Não existem pets cadastrados ainda</h1>
-}
-else
-{
-    <table>
-        <thead>
-            <tr>
-                <th>Foto</th>
-                <th>Nome</th>
-                <th>Informações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var pet in Model.Pets)
+        @using (Html.BeginForm("Filter", "Pets"))
+        {
+            <div class="sidebar-sticky" style="min-height: 100%">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        @Html.LabelFor(f => f.Filter.CountyId)
+                        @Html.DropDownListFor(f => f.Filter.CountyId, new SelectList(Model.Filter.Counties, "Id", "Name"), "Selecione um Município", new { @class = "form-control custom-select d-block w-100" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.LabelFor(f => f.Filter.StateId)
+                        @Html.DropDownListFor(f => f.Filter.StateId, new SelectList(Model.Filter.States, "Id", "Name"), "Selecione um Estado", new { @class = "form-control custom-select d-block w-100" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.LabelFor(f => f.Filter.PetTypeId)
+                        @Html.DropDownListFor(f => f.Filter.PetTypeId, new SelectList(Model.Filter.PetTypes, "Id", "Name"), "Selecione um Tipo de Animal", new { @class = "form-control custom-select d-block w-100" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.LabelFor(f => f.Filter.PetSizeId)
+                        @Html.DropDownListFor(f => f.Filter.PetSizeId, new SelectList(Model.Filter.PetSizes, "Id", "Name"), "Selecione um Porte", new { @class = "form-control custom-select d-block w-100" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.LabelFor(f => f.Filter.PetGenderId)
+                        @Html.DropDownListFor(f => f.Filter.PetGenderId, new SelectList(Model.Filter.PetGenders, "Id", "Name"), "Selecione um Sexo", new { @class = "form-control custom-select d-block w-100" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.LabelFor(f => f.Filter.PetBreedTypeId)
+                        @Html.DropDownListFor(f => f.Filter.PetBreedTypeId, new SelectList(Model.Filter.PetBreedTypes, "Id", "Name"), "Selecione a Raça", new { @class = "form-control custom-select d-block w-100" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.LabelFor(f => f.Filter.AgeRange)
+                        @Html.EnumDropDownListFor(f => f.Filter.AgeRange, "Selecione a idade do pet", new { @class = "form-control custom-select d-block w-100" })
+                    </li>
+                </ul>
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Filtros Adicionais</span>
+                    <a class="d-flex align-items-center text-muted" href="#">
+                        <span data-feather="plus-circle"></span>
+                    </a>
+                </h6>
+                <hr class="mb-4">
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <div class="col-md-6 mb-3" style="padding-left: 35px;">
+                            <label>
+                                @Html.CheckBoxFor(f => f.Filter.Vaccinated) Vacinado?
+                            </label>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="col-md-6 mb-3" style="padding-left: 35px;">
+                            <label>
+                                @Html.CheckBoxFor(f => f.Filter.Trained) Adestrado?
+                            </label>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="col-md-6 mb-3" style="padding-left: 35px;">
+                            <label>
+                                @Html.CheckBoxFor(f => f.Filter.Castrated) Castrado?
+                            </label>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="col-md-6 mb-3" style="padding-left: 35px;">
+                            <label>
+                                @Html.CheckBoxFor(f => f.Filter.SpecialCare) Cuidados Especiais?
+                            </label>
+                        </div>
+                    </li>
+                    <li>
+                        <button type="submit" class="btn btn-primary" style="margin-left: 20%; width: 120px;">Filtrar</button>
+                    </li>
+                </ul>
+                <hr class="mb-4">
+            </div>
+        }
+    </nav>
+    <div>
+
+        @if (!Model.Pets.Any())
+        {
+            <h1>Não existem pets cadastrados ainda</h1>
+        }
+        else
+        {
+            foreach (var pet in Model.Pets)
             {
-                <tr>
-                    <td></td>
-                    <td>@Html.ActionLink(pet.Name, "PetInfo", new { id = pet.Id })</td>
-                    <td>@pet.Description</td>
-                </tr>
+                <div class="col-md-11">
+                    <div class="card flex-md-row mb-2 mt-2 box-shadow h-md-250">
+                        <div class="card-body d-flex flex-column align-items-start">
+                            <strong class="d-inline-block mb-2 text-primary">@pet.PetTypeId</strong>
+                            <h3 class="mb-0">
+                                <a class="text-dark" href="#">@pet.Name</a>
+                            </h3>
+                            <div class="mb-1 text-muted">@pet.AgeInMonths meses</div>
+                            <p class="card-text mb-auto">@pet.Description</p>
+                            <a href="@Url.Action("PetInfo", new { id = pet.Id })">Mais informações</a>
+                        </div>
+                        <img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Thumbnail [200x250]"
+                             src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22200%22%20height%3D%22250%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%20250%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1641f58642e%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A13pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1641f58642e%22%3E%3Crect%20width%3D%22200%22%20height%3D%22250%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2256.203125%22%20y%3D%22131%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                             data-holder-rendered="true" style="width: 200px; height: 250px;">
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
-}
+        }
+    </div>
+
+</div>

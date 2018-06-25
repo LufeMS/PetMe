@@ -29,7 +29,6 @@
 }
 else if (Model.Adoption.AdoptionStatusId == 2)
 {
-
     <div id="message-box">
         <label>Digite uma mensagem:</label>
         <textarea id="text"></textarea>
@@ -38,7 +37,62 @@ else if (Model.Adoption.AdoptionStatusId == 2)
 
     if (!Model.Adoption.InterestedUserPermission && !Model.Adoption.PetOwnerPermission)
     {
-        <a href="@Url.Action("FinishAdoption", new { id = Model.Adoption.Id, userId = Model.CurrentUserId })">Finalizar Adoção</a>
+        if (Model.OwnerInfo.Id == Model.CurrentUserId)
+        {
+            <a href="@Url.Action("StartTransfer", new { id = Model.Adoption.Id})">Doar Pet</a>
+        }
+        else
+        {
+            <a href="@Url.Action("StartTransfer", new { id = Model.Adoption.Id})">Receber Pet</a>
+        }
+    }
+
+    else if (Model.Adoption.PetOwnerId == Model.CurrentUserId)
+    {
+        if (Model.Adoption.PetOwnerPermission && !Model.Adoption.InterestedUserPermission)
+        {
+            <p> Aguardando aceite da pessoa interessada</p>
+        }
+        else
+        {
+            <p>A outra parte interessada está aguardando seu aceite</p>
+            <a href="@Url.Action("StartTransfer", new { id = Model.Adoption.Id})">Doar Pet</a>
+        }
+    }
+
+    else if (Model.Adoption.InterestedUserId == Model.CurrentUserId)
+    {
+        if (Model.Adoption.InterestedUserPermission && !Model.Adoption.PetOwnerPermission)
+        {
+            <p>Aguardando aceite do dono do pet</p>
+        }
+        else
+        {
+            <p>A outra parte interessada está aguardando seu aceite </p>
+            <a href="@Url.Action("StartTransfer", new { id = Model.Adoption.Id})">Receber Pet</a>
+        }
+    }
+    <a href="@Url.Action("CancelAdoption", new { id = Model.Adoption.Id })">Cancelar Adoção</a>
+}
+else if (Model.Adoption.AdoptionStatusId == 3)
+{
+    <p>Essa adoção foi finalizada</p>
+}
+else if (Model.Adoption.AdoptionStatusId == 4)
+{
+    <p>Essa adoção foi cancelada</p>
+}
+else if (Model.Adoption.AdoptionStatusId == 5)
+{
+    <div id="message-box">
+        <label>Digite uma mensagem:</label>
+        <textarea id="text"></textarea>
+        <button id="enviar-mensagem">Enviar</button>
+    </div>
+
+    if (!Model.Adoption.InterestedUserPermission && !Model.Adoption.PetOwnerPermission)
+    {
+        <a href="@Url.Action("FinishAdoption", new { id = Model.Adoption.Id})">Finalizar Adoção</a>
     }
 
     else if (Model.Adoption.PetOwnerId == Model.CurrentUserId)
@@ -69,14 +123,6 @@ else if (Model.Adoption.AdoptionStatusId == 2)
         }
     }
     <a href="@Url.Action("CancelAdoption", new { id = Model.Adoption.Id })">Cancelar Adoção</a>
-}
-else if (Model.Adoption.AdoptionStatusId == 3)
-{
-    <p>Essa adoção foi finalizada</p>
-}
-else if (Model.Adoption.AdoptionStatusId == 4)
-{
-    <p>Essa adoção foi cancelada</p>
 }
 
 @section scripts

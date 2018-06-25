@@ -4,13 +4,49 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.PetInfo.Name</h2>
-
 @using (Html.BeginForm("Adopt", "Adoptions"))
 {
-    @Html.HiddenFor(m => m.PetInfo.Id);
-    @Html.HiddenFor(m => m.OwnerInfo.Id);
-    @Html.HiddenFor(m => m.UserInfo.Id);
-    <button class="btn btn-primary">Adotar Pet</button>
+    <div style="margin-top: 4%">
+        <div class="col-md-10" style="margin-left: 9%;">
+            <div class="card flex-md-row mb-2 mt-2 box-shadow h-md-250" style="min-height: 400px;">
+                <div id="imgCarousel" class="carousel slide col-md-4" style="border-radius: 50%;" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100 img-circle" src="img/500x500.jpg" style="margin-top: 7%;" alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100 img-circle" src="img/500x500.jpg" style="margin-top: 7%;" alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100 img-circle" src="img/500x500.jpg" style="margin-top: 7%;" alt="Third slide">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#imgCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#imgCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <div class="card-body d-flex flex-column align-items-start" style="padding-left: 50px; padding-top: 50px;">
+                    <strong class="d-inline-block mb-2 text-primary">@Model.PetInfo.PetType.Name</strong>
+                    <h3 class="mb-0">
+                        <a class="text-dark" href="#">@Model.PetInfo.Name</a>
+                    </h3>
+                    <div class="mb-1 text-muted">@Model.PetInfo.AgeInMonths meses</div>
+                    <label class="card-text">@Model.PetInfo.PetBreedType.Name</label>
+                    <label class="card-text">@Model.PetInfo.PetSize.Name</label>
+                    <label class="card-text">@Model.PetInfo.PetGender.Name</label>
+                    <label class="card-text">@Model.PetInfo.Description</label>
+                    @Html.HiddenFor(m => m.PetInfo.Id)
+                    @Html.HiddenFor(m => m.OwnerInfo.Id)
+                    @Html.HiddenFor(m => m.UserInfo.Id)
+                    <button type="submit" class="btn btn-primary">Adotar Pet</button>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 

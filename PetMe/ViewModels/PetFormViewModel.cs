@@ -11,6 +11,10 @@ namespace PetMe.ViewModels
     {
         public int Id { get; set; }
 
+        public  HttpPostedFileBase[] Pictures { get; set; }
+
+        public List<PetPicture> PetPictures { get; set; }
+
         [Required]
         public string OwnerId { get; set; }
         public virtual ApplicationUser Owner { get; set; }
