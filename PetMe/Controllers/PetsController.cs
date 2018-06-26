@@ -265,7 +265,6 @@ namespace PetMe.Controllers
                         db.PetPictures.Add(petPicture);
 
                         db.SaveChanges();
-
                     }
                 }
             }
