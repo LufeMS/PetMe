@@ -19,26 +19,24 @@ namespace PetMe.Models
 
         public int Id { get; set; }
 
-        [Required]
         public string OwnerId { get; set; }
         public virtual ApplicationUser Owner { get; set; }
 
-        [Required]
         public string Name { get; set; }
 
         public byte AgeInMonths { get; set; }
 
-        public byte PetTypeId { get; set; }
+        public byte? PetTypeId { get; set; }
         public virtual PetType PetType { get; set; }
 
-        public byte PetBreedTypeId { get; set; }
+        public byte? PetBreedTypeId { get; set; }
         public virtual PetBreedType PetBreedType { get; set; }
         public string BreedDetail { get; set; }
 
-        public byte PetSizeId { get; set; }
+        public byte? PetSizeId { get; set; }
         public virtual PetSize PetSize { get; set; }
 
-        public byte PetGenderId { get; set; }
+        public byte? PetGenderId { get; set; }
         public virtual PetGender PetGender { get; set; }
 
         public string Color { get; set; }
@@ -58,28 +56,24 @@ namespace PetMe.Models
         /* ANIMAL ADDRESS */
         public bool LivesWithOwner { get; set; }
 
-        [Required]
         [MaxLength(8)]
         public string ZipCode { get; set; }
 
-        [Required]
         [MaxLength(65)]
         public string Address { get; set; }
 
-        [Required]
         [MaxLength(8)]
         public string AddressNumber { get; set; }
 
         [MaxLength(50)]
         public string AddressComplement { get; set; }
 
-        [Required]
         public string District { get; set; }
 
-        public int CountyId { get; set; }
+        public int? CountyId { get; set; }
         public virtual County County { get; set; }
 
-        public int StateId { get; set; }
+        public int? StateId { get; set; }
         public virtual State State { get; set; }
 
         /* CONTROL FIELDS*/
@@ -96,5 +90,6 @@ namespace PetMe.Models
             ZipCode = owner.ZipCode;
             District = owner.District;
         }
+        
     }
 }
