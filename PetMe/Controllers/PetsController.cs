@@ -205,88 +205,70 @@ namespace PetMe.Controllers
             {
                 return View("PetForm", petViewModel);
             }
-            
+
+            Pet pet;
+
             if (petViewModel.Id == 0)
+                pet = new Pet();
+            else
+                pet = db.Pets.Find(petViewModel.Id);
+
+            if (pet == null)
+                return HttpNotFound();
+
+            Mapper.Map(petViewModel, pet);
+
+            if (petViewModel.LivesWithOwner)
             {
-                var pet = new Pet();
-
-                Mapper.Map(petViewModel, pet);
-
-                if (petViewModel.LivesWithOwner)
-                {
-                    var owner = db.Users.Find(petViewModel.OwnerId);
-                    pet.FillInAddress(owner);
-                }
-                else
-                {
-                    var county = db.Counties.First(c => c.Name.Equals(petViewModel.CountyView));
-                    var state = db.States.First(s => s.Name.Equals(petViewModel.StateView));
-
-                    pet.StateId = state.Id;
-                    pet.CountyId = county.Id;
-                }
-
-                pet.Active = true;
-                pet.AddedIn = DateTime.Now;
-                db.Pets.Add(pet);
-                db.SaveChanges();
-
+                var owner = db.Users.Find(petViewModel.OwnerId);
+                pet.FillInAddress(owner);
             }
             else
             {
-                var petInDb = db.Pets.Find(petViewModel.Id);
+                var county = db.Counties.First(c => c.Name.Equals(petViewModel.CountyView));
+                var state = db.States.First(s => s.Name.Equals(petViewModel.StateView));
 
-                if (petInDb == null)
-                    return HttpNotFound();
-
-                Mapper.Map(petViewModel, petInDb);
-
-                if (petViewModel.LivesWithOwner)
-                {
-                    var owner = db.Users.Find(petViewModel.OwnerId);
-                    petInDb.FillInAddress(owner);
-                }
-                else
-                {
-                    var county = db.Counties.First(c => c.Name.Equals(petViewModel.CountyView));
-                    var state = db.States.First(s => s.Name.Equals(petViewModel.StateView));
-
-                    petInDb.StateId = state.Id;
-                    petInDb.CountyId = county.Id;
-                }
-
-                petInDb.OwnerId = petViewModel.OwnerId;
-
-                db.SaveChanges();
-
+                pet.StateId = state.Id;
+                pet.CountyId = county.Id;
             }
 
+            pet.OwnerId = petViewModel.OwnerId;
 
-            //if (petViewModel.Pictures.Any())
-            //{
-            //    foreach (var picture in petViewModel.Pictures)
-            //    {
-            //        if(picture != null && picture.ContentLength > 0)
-            //        {
-            //            var petPicture = new PetPicture
-            //            {
-            //                PetId = pet.Id,
-            //                Picture = new byte[picture.ContentLength]
-            //            };
+            if (pet.Id == 0)
+            {
+                pet.Active = true;
+                pet.AddedIn = DateTime.Now;
+                db.Pets.Add(pet);
+            }
 
-            //            picture.InputStream.Read(petPicture.Picture, 0, picture.ContentLength);
+            db.SaveChanges();
 
-            //            var mainPicture = db.PetPictures.SingleOrDefault(pp => pp.PetId == pet.Id && pp.MainPic);
+            if (petViewModel.Pictures.Any())
+            {
+                foreach (var picture in petViewModel.Pictures)
+                {
+                    if (picture != null && picture.ContentLength > 0)
+                    {
+                        var petPicture = new PetPicture
+                        {
+                            PetId = pet.Id,
+                            Picture = new byte[picture.ContentLength]
+                        };
 
-            //            if (mainPicture == null)
-            //                petPicture.MainPic = true;
+                        picture.InputStream.Read(petPicture.Picture, 0, picture.ContentLength);
 
-            //            db.PetPictures.Add(petPicture);
-            //        }
-            //    }
+                        var mainPicture = db.PetPictures.SingleOrDefault(pp => pp.PetId == pet.Id && pp.MainPic);
 
-            //    db.SaveChanges();
-            //}
+                        if (mainPicture == null)
+                            petPicture.MainPic = true;
+
+                        db.PetPictures.Add(petPicture);
+
+                        db.SaveChanges();
+
+                    }
+                }
+            }
 
             return RedirectToAction("PetOwnerList");
         }
