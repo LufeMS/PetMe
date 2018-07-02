@@ -5,86 +5,59 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - PetMe!</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
-@*<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nome do aplicativo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Início", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Pesquisar", "PetList", "Pets")</li>
-                    <li>@Html.ActionLink("Meus Pets", "PetOwnerList", "Pets")</li>
-                    <li>@Html.ActionLink("Perfil", "MyProfile", "Profile")</li>
-                    <li>@Html.ActionLink("Minhas Adoções", "MyAdoptions", "Adoptions")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    
-    </div>*@
+<body>
 
-<body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-black bg-black">
-        <a class="navbar-brand a-yellow" href="#">PetMe</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-paw  align-center"></i>
+                PetMe
+            </a>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link a-yellow" href="@Url.Action("Index", "Home")">
-                        Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link a-yellow dropdown-toggle" href="#" id="petsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
-                        Pets
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <div class="dropdown-content">
-                            <a class="dropdown-item" href="@Url.Action("PetForm", "Pets")">Anunciar</a>
-                            <a class="dropdown-item" href="@Url.Action("PetList", "Pets")">Adotar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@Url.Action("Index", "Home")">Início <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="petsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Pets
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="petsDropdown">
+                            <a class="dropdown-item" href="@Url.Action("PetList", "Pets")">Adotar um Pet</a>
+                            <a class="dropdown-item" href="@Url.Action("PetForm", "Pets")">Doar Animal</a>
                         </div>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link a-yellow dropdown-toggle" href="#" id="organizationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
-                        Organização
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="@Url.Action("About", "Home")">Sobre</a>
-                        <a class="dropdown-item" href="@Url.Action("Contact", "Home")">Contato</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Contribua com o Site</a>
-                        <a class="dropdown-item" href="#">Seja um Parceiro</a>
-                    </div>
-                </li>
-            </ul>
-            @Html.Partial("_LoginPartial")
-        </div>
-    </nav>
-    <div class="content">
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="organizacaoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Organização
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="organizacaoDropdown">
+                            <a class="dropdown-item" href="@Url.Action("Contact", "Home")">Contato</a>
+                            <a class="dropdown-item" href="@Url.Action("About", "Home")">Sobre</a>
+                            <a class="dropdown-item" href="#">Ajude-nos a manter o site</a>
+                        </div>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </nav>
+    </header>
+    <!-- Fim da Navbar -->
+    <!-- Começo do content -->
+    <main role="main">
         @RenderBody()
-    </div>
-    <footer class="text-muted text-center text-small">
+    </main>
+    <footer class="text-muted text-center text-small mt-3">
         <div class="container">
             <p class="mb-1">&copy;2018 Petme</p>
             <ul class="list-inline">

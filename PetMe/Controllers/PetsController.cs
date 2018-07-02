@@ -306,5 +306,20 @@ namespace PetMe.Controllers
 
             return RedirectToAction("PetOwnerList");
         }
+
+        public ActionResult ReportPet(int id)
+        {
+
+            var pet = db.Pets.Find(id);
+
+            if (pet == null)
+                return HttpNotFound();
+
+            pet.Active = false;
+
+            db.SaveChanges();
+
+            return RedirectToAction("PetList");
+        }
     }
 }
