@@ -1,0 +1,221 @@
+﻿@model PetMe.ViewModels.AdoptionViewModel
+@{
+    ViewBag.Title = "AdoptionInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container h-100 my-3">
+    <div class="card h-100">
+        <div class="row h-100">
+            <div class="col-4">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="img/blank-profile-picture.png" alt="UserPicture" class="m-3" height="150" width="150">
+                    </div>
+                </div>
+                <div class="row">
+                    <dl class="mx-3 col-12">
+                        <dt>Nome do Pet</dt>
+                        <dd>
+                            <a href="@Url.Action("PetInfo","Pets", new { id = Model.PetInfo.Id})">@Model.PetInfo.Name</a>
+                        </dd>
+                        <dt>Idade</dt>
+                        <dd>@{(Model.PetInfo.AgeInMonths % 12) > 0 ? Model.PetInfo.AgeInMonths % 12 + " anos" : Model.PetInfo.AgeInMonths + " meses"}</dd>
+                        <dt>Região</dt>
+                        <dd>@Model.PetInfo.County.Name</dd>
+                        <dt>Dono</dt>
+                        <dd>@Model.OwnerInfo.FirstName</dd>
+                        <dt>Pessoa Interessada</dt>
+                        <dd>@Model.InterestedPartyInfo.FirstName</dd>
+                        <dt>Status da Adoção</dt>
+                        <dd>@Model.Adoption.AdoptionStatus.Name</dd>
+                    </dl>
+                    <div class="col-12 mx-3 mb-3">
+                        @if (Model.Adoption.AdoptionStatusId == 1)
+                        {
+                            if (Model.Adoption.PetOwnerId == Model.CurrentUserId)
+                            {
+                                <a class="btn button-green" href="@Url.Action("AcceptAdoption", new { id = Model.Adoption.Id, adoptionVM = Model })">
+                                    <i class="fas fa-check"></i> Aceitar Proposta
+                                </a>
+                            }
+                            else
+                            {
+                                <small class="form-text text-muted">
+                                    Aguardando aceitação da proposta.
+                                </small>
+                            }
+                            <a class="btn button-red" href="@Url.Action("CancelAdoption", new { id = Model.Adoption.Id })">
+                                <i class="fas fa-ban"></i> Cancelar Adoção
+                            </a>
+                        }
+                        else if (Model.Adoption.AdoptionStatusId == 2)
+                        {
+                            if (!Model.Adoption.InterestedUserPermission && !Model.Adoption.PetOwnerPermission)
+                            {
+                                if (Model.OwnerInfo.Id == Model.CurrentUserId)
+                                {
+                                    <a class="btn button-green" href="@Url.Action("StartTransfer", new { id = Model.Adoption.Id}))">
+                                        <i class="fas fa-check"></i> Doar Pet
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="btn button-green" href="@Url.Action("StartTransfer", new { id = Model.Adoption.Id}))">
+                                        <i class="fas fa-check"></i> Receber Pet
+                                    </a>
+                                }
+                            }
+
+                            else if (Model.Adoption.PetOwnerId == Model.CurrentUserId)
+                            {
+                                if (Model.Adoption.PetOwnerPermission && !Model.Adoption.InterestedUserPermission)
+                                {
+                                    <small class="form-text text-muted">
+                                        Aguardando aceite da pessoa interessada.
+                                    </small>
+                                }
+                                else
+                                {
+                                    <small class="form-text text-muted">
+                                        A outra pessoa está aguardando seu aceite.
+                                    </small>
+                                    <a class="btn button-green" href="@Url.Action("StartTransfer", new { id = Model.Adoption.Id})">
+                                        <i class="fas fa-check"></i> Doar Pet
+                                    </a>
+                                }
+                            }
+
+                            else if (Model.Adoption.InterestedUserId == Model.CurrentUserId)
+                            {
+                                if (Model.Adoption.InterestedUserPermission && !Model.Adoption.PetOwnerPermission)
+                                {
+                                    <small class="form-text text-muted">
+                                        Aguardando aceite do dono do pet.
+                                    </small>
+                                }
+                                else
+                                {
+                                    <small class="form-text text-muted">
+                                        O dono do pet está aguardando seu aceite
+                                    </small>
+                                    <a class="btn button-green" href="@Url.Action("StartTransfer", new { id = Model.Adoption.Id})">
+                                        <i class="fas fa-check"></i> Receber Pet
+                                    </a>
+                                }
+                            }
+                            <a class="btn button-red" href="@Url.Action("CancelAdoption", new { id = Model.Adoption.Id })">
+                                <i class="fas fa-ban"></i> Cancelar Adoção
+                            </a>
+                        }
+                        else if (Model.Adoption.AdoptionStatusId == 3)
+                        {
+                            <small class="form-text text-muted">
+                                Essa adoção foi finalizada.
+                            </small>
+                        }
+                        else if (Model.Adoption.AdoptionStatusId == 4)
+                        {
+                            <small class="form-text text-muted">
+                                Essa adoção foi cancelada.
+                            </small>
+                        }
+                        else if (Model.Adoption.AdoptionStatusId == 5)
+                        {
+                            if (!Model.Adoption.InterestedUserPermission && !Model.Adoption.PetOwnerPermission)
+                            {
+                                <a class="btn button-green" href="@Url.Action("FinishAdoption", new { id = Model.Adoption.Id})">
+                                    <i class="fas fa-check"></i> Finalizar Adoção
+                                </a>
+                            }
+
+                            else if (Model.Adoption.PetOwnerId == Model.CurrentUserId)
+                            {
+                                if (Model.Adoption.PetOwnerPermission && !Model.Adoption.InterestedUserPermission)
+                                {
+                                    <small class="form-text text-muted">
+                                        Aguardando aceite da pessoa interessada.
+                                    </small>
+                                }
+                                else
+                                {
+                                    <small class="form-text text-muted">
+                                        A outra parte interessada está aguardando seu aceite.
+                                    </small>
+                                    <a class="btn button-green" href="@Url.Action("FinishAdoption", new { id = Model.Adoption.Id })">
+                                        <i class="fas fa-check"></i> Finalizar Adoção
+                                    </a>
+                                }
+                            }
+
+                            else if (Model.Adoption.InterestedUserId == Model.CurrentUserId)
+                            {
+                                if (Model.Adoption.InterestedUserPermission && !Model.Adoption.PetOwnerPermission)
+                                {
+                                    <small class="form-text text-muted">
+                                        Aguardando aceite do dono do pet.
+                                    </small>
+                                }
+                                else
+                                {
+                                    <small class="form-text text-muted">
+                                        A outra parte interessada está aguardando seu aceite.
+                                    </small>
+                                    <a class="btn button-green" href="@Url.Action("FinishAdoption", new { id = Model.Adoption.Id })">
+                                        <i class="fas fa-check"></i> Finalizar Adoção
+                                    </a>
+                                }
+                            }
+                            <a class="btn button-red" href="@Url.Action("CancelAdoption", new { id = Model.Adoption.Id })">
+                                <i class="fas fa-ban"></i> Cancelar Adoção
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 h-100">
+                <div id="mails" class="card-conversa card">
+                    @{ Html.RenderAction("RenderMails", new { id = Model.Adoption.Id }); }
+                </div>
+                <form class="form-inline m-0 p-0">
+                    <div class="input-group col-12" id="message-box">
+                        <input type="text" id="text" class="form-control col-sm-12" placeholder="Digite sua mensagem...">
+                        <button class="button-green btn btn-primarys" id="enviar-mensagem" type="button" style="border-bottom-left-radius: 0px; border-top-left-radius: 0px;"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#message-box").on("click", "button#enviar-mensagem", function () {
+
+                var mensagem = {
+                    text: $("#text").val(),
+                    adoptionId: @Model.Adoption.Id,
+                    petOwnerId: "@Model.OwnerInfo.Id",
+                    interestedPartyId: "@Model.InterestedPartyInfo.Id",
+                    currentUserId: "@Model.CurrentUserId"
+                };
+
+                $.ajax({
+                    url: "@Url.Action("SendMessage", "Adoptions")",
+                    type: "get",
+                    data: mensagem,
+                    success: function (result) {
+                        $("#mails").html(result);
+                        $("#text").val("");
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+
+
+

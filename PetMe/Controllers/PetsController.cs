@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace PetMe.Controllers
 {
+    [Authorize]
     public class PetsController : Controller
     {
         ApplicationDbContext db;
@@ -126,6 +127,7 @@ namespace PetMe.Controllers
             return View("OwnerList", petViewModel);
         }
 
+        [AllowAnonymous]
         public ActionResult PetList()
         {
             var pets = db.Pets.ToList();
@@ -272,6 +274,7 @@ namespace PetMe.Controllers
             return RedirectToAction("PetOwnerList");
         }
 
+        [AllowAnonymous]
         public ActionResult PetInfo(int id)
         {
             var pet = db.Pets.Find(id);

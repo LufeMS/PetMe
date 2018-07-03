@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace PetMe.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         private ApplicationDbContext db;

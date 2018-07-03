@@ -375,6 +375,16 @@
     <Content Include="Resources\300x72.jpg" />
     <Content Include="Resources\500x500.jpg" />
     <Content Include="Resources\blank-profile-picture.png" />
+    <Content Include="Resources\depoimento1.jpg" />
+    <Content Include="Resources\depoimento2.jpg" />
+    <Content Include="Resources\depoimento3.jpg" />
+    <Content Include="Resources\depoimento4.jpg" />
+    <Content Include="Resources\evento1.png" />
+    <Content Include="Resources\evento2.png" />
+    <Content Include="Resources\evento3.png" />
+    <Content Include="Resources\evento4.png" />
+    <Content Include="Resources\petshome.jpg" />
+    <Content Include="Resources\procura1.jpg" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -475,9 +485,9 @@
     <Content Include="Views\Pets\Search.cshtml" />
     <Content Include="Views\Pets\Info.cshtml" />
     <Content Include="Views\Pets\OwnerList.cshtml" />
-    <Content Include="Views\Adoptions\AdoptionConfirmation.cshtml" />
-    <Content Include="Views\Adoptions\AdoptionList.cshtml" />
-    <Content Include="Views\Adoptions\AdoptionInfo.cshtml" />
+    <Content Include="Views\Adoptions\Confirmation.cshtml" />
+    <Content Include="Views\Adoptions\List.cshtml" />
+    <Content Include="Views\Adoptions\Info.cshtml" />
     <Content Include="Views\Adoptions\_Mails.cshtml" />
   </ItemGroup>
   <ItemGroup>

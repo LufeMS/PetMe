@@ -11,66 +11,72 @@
 </head>
 <body>
 
-    <!-- Navbar -->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-paw  align-center"></i>
-                PetMe
-            </a>
+        <!-- Navbar -->
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light nav-green bg-light">
+                <a class="navbar-brand" href="#" style="font-family: cursive">
+                    <i class="fas fa-paw  align-center"></i>
+                    PetMe
+                </a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="@Url.Action("Index", "Home")">Início <span class="sr-only">(current)</span></a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="a-nav nav-link" href="@Url.Action("Index", "Home")">Início <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="a-nav nav-link dropdown-toggle" href="#" id="petsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Pets
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="petsDropdown">
+                                <a class="dropdown-item" href="@Url.Action("PetList", "Pets")">Adotar um Pet</a>
+                                <a class="dropdown-item" href="@Url.Action("PetForm", "Pets")">Doar Animal</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="a-nav nav-link dropdown-toggle" href="#" id="organizacaoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Organização
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="organizacaoDropdown">
+                                <a class="dropdown-item" href="@Url.Action("Contact", "Home")">Contato</a>
+                                <a class="dropdown-item" href="@Url.Action("About", "Home")">Sobre</a>
+                                <a class="dropdown-item" href="#">Ajude-nos a manter o site</a>
+                            </div>
+                        </li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </nav>
+        </header>
+        <!-- Fim da Navbar -->
+
+        <!-- Começo do content -->
+        <main role="main">
+            @RenderBody()
+        </main>
+        <!-- Fim do content-->
+
+        <!-- Começo do footer -->
+        <footer class="text-muted text-center text-small mt-3">
+            <div class="container">
+                <p class="mb-1">&copy;2018 Petme</p>
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <a href="#">Politica de Privacidade</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="petsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Pets
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="petsDropdown">
-                            <a class="dropdown-item" href="@Url.Action("PetList", "Pets")">Adotar um Pet</a>
-                            <a class="dropdown-item" href="@Url.Action("PetForm", "Pets")">Doar Animal</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="organizacaoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Organização
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="organizacaoDropdown">
-                            <a class="dropdown-item" href="@Url.Action("Contact", "Home")">Contato</a>
-                            <a class="dropdown-item" href="@Url.Action("About", "Home")">Sobre</a>
-                            <a class="dropdown-item" href="#">Ajude-nos a manter o site</a>
-                        </div>
+                    <li class="list-inline-item">
+                        <a href="#">Termos de uso</a>
                     </li>
                 </ul>
-                @Html.Partial("_LoginPartial")
             </div>
-        </nav>
-    </header>
-    <!-- Fim da Navbar -->
-    <!-- Começo do content -->
-    <main role="main">
-        @RenderBody()
-    </main>
-    <footer class="text-muted text-center text-small mt-3">
-        <div class="container">
-            <p class="mb-1">&copy;2018 Petme</p>
-            <ul class="list-inline">
-                <li class="list-inline-item">
-                    <a href="#">Politica de Privacidade</a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="#">Termos de uso</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
-    @Scripts.Render("~/bundles/scripts")
-    @RenderSection("scripts", required: false)
-</body>
+        </footer>
+        <!-- Fim do footer -->
+
+        @Scripts.Render("~/bundles/scripts")
+        @RenderSection("scripts", required: false)
+    </body>
 </html>

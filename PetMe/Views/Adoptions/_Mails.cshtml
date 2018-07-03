@@ -2,11 +2,22 @@
 
 @foreach (var mail in Model)
 {
-    <label>Enviado por: @mail.SenderId</label>
-    <label>Enviado em: @mail.SentDate</label>
-    <label>Mensagem:</label>
-    <p>@mail.Text</p>
-    <label>Recebido por: @mail.ReceiverId</label>
+    if (mail.SenderId == User.Identity.GetUserId())
+    {
+        <div class="container-conversa darker">
+            <img class="right" src="img/blank-profile-picture.png" alt="">
+            <p class="a-nav">@mail.Text</p>
+            <span class="a-nav time-left">@mail.SentDate</span>
+        </div>
+    }
+    else
+    {
+        <div class="container-conversa">
+            <img src="img/blank-profile-picture.png" alt="">
+            <p class="a-nav">@mail.Text?</p>
+            <span class="a-nav time-right">@mail.SentDate</span>
+        </div>
+    }
 }
 
 

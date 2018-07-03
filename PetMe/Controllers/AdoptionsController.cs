@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace PetMe.Controllers
 {
+    [Authorize]
     public class AdoptionsController : Controller
     {
         ApplicationDbContext db;
@@ -40,18 +41,13 @@ namespace PetMe.Controllers
             return View("AdoptionConfirmation", adoptionMail);
         }
 
-        public ActionResult ConfirmAdoptionRequest(AdoptionMailViewModel adoptionMailVM)
+        public ActionResult ConfirmAdoptionRequest(string text, string ReceiverId, string SenderId, int AnimalId)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("AdoptionConfirmation", adoptionMailVM);
-            }
-
             var adoption = new Adoption
             {
-                InterestedUserId = adoptionMailVM.SenderId,
-                PetOwnerId = adoptionMailVM.ReceiverId,
-                AnimalId = adoptionMailVM.AnimalId,
+                InterestedUserId = SenderId,
+                PetOwnerId = ReceiverId,
+                AnimalId = AnimalId,
                 AdoptionStatusId = 1,
                 AdoptionStart = DateTime.Now                
             };
@@ -62,16 +58,16 @@ namespace PetMe.Controllers
             var adoptionMail = new AdoptionMail
             {
                 AdoptionId = adoption.Id,
-                ReceiverId = adoptionMailVM.ReceiverId,
-                SenderId = adoptionMailVM.SenderId,
+                ReceiverId = ReceiverId,
+                SenderId = SenderId,
                 SentDate = DateTime.Now,
-                Text = adoptionMailVM.Text
+                Text = text
             };
 
             db.AdoptionMails.Add(adoptionMail);
             db.SaveChanges();
 
-            return RedirectToAction("PetOwnerList", "Pets");
+            return RedirectToAction("PetList", "Pets");
         }
 
         public ActionResult MyAdoptions()

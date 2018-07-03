@@ -4,110 +4,156 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container">
+<div class="container w-50 my-5">
+    <div class="card">
+        @using (Html.BeginForm("SaveUser", "Profile", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data", @class = "m-3" }))
+        {
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    @if (Model.Avatar != null && Model.Avatar.LongLength > 0)
+                    {
+                        var base64 = Convert.ToBase64String(Model.Avatar);
+                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
 
-    @using (Html.BeginForm("SaveUser", "Profile", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data", @style = "margin-left: 26%; text-align:center" }))
-    {
-        <div class="py-5 text-center">
+                        <img src='@imgsrc' class="m-3 rounded-circle" alt="" width="150" height="150" />
+                    }
+                    else
+                    {
+                        <img src="~/Resources/blank-profile-picture.png" class="m-3 rounded-circle" alt="" width="150" height="150" />
 
-            @if (Model.Avatar != null && Model.Avatar.LongLength > 0)
-            {
-                var base64 = Convert.ToBase64String(Model.Avatar);
-                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
-
-                <img src='@imgsrc' class="d-block mx-auto mb-4" alt="" width="85" height="85" />
-            }
-            else
-            {
-                <img src="~/Resources/blank-profile-picture.png" class="d-block mx-auto mb-4" alt="" width="85" height="85" />
-
-            }
-
-            <input type="file" name="avatarUpload" id="avatarUpload" />
-            <h2>@Model.UserName (@Model.Email)</h2>
-        </div>
-
-        @Html.HiddenFor(u => u.UserName)
-        @Html.HiddenFor(u => u.Email)
-
-        <div class="row">
-            <div class="col-md-8 order-md-1">
-                <h4 class="mb-3">Minhas Informações</h4>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        @Html.TextBoxFor(u => u.FirstName, new { @class = "form-control", @placeholder = "Primeiro nome" })
-                        @Html.ValidationMessageFor(u => u.FirstName)
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        @Html.TextBoxFor(u => u.Surname, new { @class = "form-control", @placeholder = "Sobrenome" })
-                        @Html.ValidationMessageFor(u => u.Surname)
-                    </div>
+                    }
+                    <label class="btn button-green btn-sm" for="avatarUpload">
+                        <input name="avatarUpload" id="avatarUpload" type="file" style="display:none;"> Selecionar Foto
+                    </label>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        @Html.TextBoxFor(u => u.Birthdate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "Date", @placeholder = "Data de nascimento" })
-                        @Html.ValidationMessageFor(u => u.Birthdate)
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="username">Usuário</label>
+                        <input type="text" name="username" id="username" disabled class="disabled form-control" placeholder="@Model.UserName">
                     </div>
-                    <div class="col-md-6 mb-3">
-                        @Html.DropDownListFor(u => u.GenderId, new SelectList(Model.Genders, "Id", "Name"), "Selecione o Gênero", new { @class = "form-control custom-select d-block w-100" })
-                        @Html.ValidationMessageFor(u => u.GenderId)
+                    <div class="form-group">
+                        <label for="userEmail">E-Mail</label>
+                        <input type="text" name="userMail" id="userMail" disabled class="form-control" placeholder="@Model.Email">
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 mb-3">
-                        @Html.TextBoxFor(u => u.DocumentNumber, new { @class = "form-control", @placeholder = "CPF" })
-                        @Html.ValidationMessageFor(u => u.DocumentNumber)
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        @Html.TextBoxFor(u => u.ZipCode, new { @class = "form-control", @id = "cep" })
-                        @Html.ValidationMessageFor(u => u.ZipCode)
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <button id="pesquisar-cep" type="button" class="btn btn-primary btn-block">Buscar Cep</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8 mb-3">
-                        <div class="input-group">
-                            @Html.TextBoxFor(u => u.Address, new { @class = "form-control", @placeholder = "Endereço", @id = "rua" })
-                            @Html.ValidationMessageFor(u => u.Address)
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="input-group">
-                            @Html.TextBoxFor(u => u.AddressNumber, new { @class = "form-control", @placeholder = "Número", @id = "nr-endereco" })
-                            @Html.ValidationMessageFor(u => u.AddressNumber)
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    @Html.TextBoxFor(u => u.AddressComplement, new { @class = "form-control", @placeholder = "Complemento (Opcional)", @id = "complemento" })
-                    @Html.ValidationMessageFor(u => u.AddressComplement)
-                </div>
-                <div class="mb-3">
-                    @Html.TextBoxFor(u => u.District, new { @class = "form-control", @placeholder = "Bairro", @id = "bairro" })
-                    @Html.ValidationMessageFor(u => u.District)
-                </div>
-                <div class="row">
-                    <div class="col-md-10 mb-3">
-                        @Html.TextBoxFor(u => u.CountyView, new { @class = "form-control", @placeholder = "Cidade", @id = "cidade" })
-                        @Html.ValidationMessageFor(u => u.CountyView)
-                    </div>
-                    <div class="col-md-2 mb-3">
-                        @Html.TextBoxFor(u => u.StateView, new { @class = "form-control", @placeholder = "UF", @id = "uf" })
-                        @Html.ValidationMessageFor(u => u.StateView)
-                    </div>
-                </div>
 
-                @Html.HiddenFor(u => u.Id)
-                @*@Html.AntiForgeryToken();*@
-                <div class="mb-3">
-                    <button class="btn btn-primary btn-lg btn-block">Salvar Informações</button>
+                    @Html.HiddenFor(u => u.UserName)
+                    @Html.HiddenFor(u => u.Email)
+
                 </div>
             </div>
-        </div>
-    }
+            <div class="hr-sect">Informações</div>
+            <div class="form-row form-group">
+                <div class="col">
+                    @Html.LabelFor(u => u.FirstName)
+                    @Html.TextBoxFor(u => u.FirstName, new { @class = "form-control", @placeholder = "Nome" })
+                    @Html.ValidationMessageFor(u => u.FirstName)
+                </div>
+                <div class="col">
+                    @Html.LabelFor(u => u.Surname)
+                    @Html.TextBoxFor(u => u.Surname, new { @class = "form-control", @placeholder = "Sobrenome" })
+                    @Html.ValidationMessageFor(u => u.Surname)
+                </div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col">
+                    @Html.LabelFor(u => u.Birthdate)
+                    @Html.TextBoxFor(u => u.Birthdate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "Date", @placeholder = "Data de nascimento" })
+                    @Html.ValidationMessageFor(u => u.Birthdate)
+                </div>
+                <div class="col">
+                    @Html.LabelFor(u => u.GenderId)
+                    @Html.DropDownListFor(u => u.GenderId, new SelectList(Model.Genders, "Id", "Name"), "Selecione o Gênero", new { @class = "form-control custom-select d-block w-100" })
+                    @Html.ValidationMessageFor(u => u.GenderId)
+                </div>
+                <div class="col">
+                    @Html.LabelFor(u => u.DocumentNumber)
+                    @Html.TextBoxFor(u => u.DocumentNumber, new { @class = "form-control", @placeholder = "CPF" })
+                    @Html.ValidationMessageFor(u => u.DocumentNumber)
+                </div>
+                <!-- Adicionar telefones (fisico e celular) -->
+            </div>
+            <div class="hr-sect">Endereço</div>
+            <div class="form-inline form-group mt-3">
+                @Html.TextBoxFor(u => u.ZipCode, new { @class = "form-control col-2 mr-2", @id = "userCep", @name = "userCep", @placeholder = "CEP" })
+                @Html.ValidationMessageFor(u => u.ZipCode)
+                <a class="btn button-green btn-sm" id="pesquisar-cep">
+                    <i class="fas fa-search"></i>
+                </a>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-10">
+                    @Html.LabelFor(u => u.Address)
+                    @Html.TextBoxFor(u => u.Address, new { @class = "form-control", @placeholder = "Rua, Avenida, Praça...", @id = "userAddress" })
+                    @Html.ValidationMessageFor(u => u.Address)
+                </div>
+                <div class="col-2">
+                    @Html.LabelFor(u => u.AddressNumber)
+                    @Html.TextBoxFor(u => u.AddressNumber, new { @class = "form-control", @placeholder = "Número", @id = "userAddressNumber" })
+                    @Html.ValidationMessageFor(u => u.AddressNumber)
+                </div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-4">
+                    @Html.LabelFor(u => u.AddressComplement)
+                    @Html.TextBoxFor(u => u.AddressComplement, new { @class = "form-control", @placeholder = "Complemento (Opcional)", @id = "userAddressComplement" })
+                    @Html.ValidationMessageFor(u => u.AddressComplement)
+                </div>
+                <div class="col-3">
+                    @Html.LabelFor(u => u.District)
+                    @Html.TextBoxFor(u => u.District, new { @class = "form-control", @placeholder = "Bairro", @id = "userDistrict" })
+                    @Html.ValidationMessageFor(u => u.District)
+                </div>
+                <div class="col-3">
+                    @Html.LabelFor(u => u.CountyView)
+                    @Html.TextBoxFor(u => u.CountyView, new { @class = "form-control", @placeholder = "Cidade", @id = "userCity" })
+                    @Html.ValidationMessageFor(u => u.CountyView)
+                </div>
+                <div class="col-2">
+                    @Html.LabelFor(u => u.StateView)
+                    @Html.TextBoxFor(u => u.StateView, new { @class = "form-control", @placeholder = "UF", @id = "userUF" })
+                    @Html.ValidationMessageFor(u => u.StateView)
+                </div>
+            </div>
+            <div class="hr-sect">Redes Sociais</div>
+            <div class="form-group mb-4 mr-3">
+                <label for="userSite">Meu Site:</label>
+                <input type="text" name="userSite" id="userSite" placeholder="https://www.exemplo.com.br" class="form-control">
+            </div>
+            <div class="form-inline form-group">
+                <i class="fab fa-twitter-square twitter-icon fa-2x"></i>
+                <div class="input-group col">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">https://twitter.com/</div>
+                    </div>
+                    <input type="text" class="form-control" id="usernameTwitter" placeholder="Username">
+                </div>
+            </div>
+            <div class="form-group form-inline">
+                <i class="fab fa-facebook-square fa-2x facebook-icon"></i>
+                <div class="input-group col">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">https://facebook.com/</div>
+                    </div>
+                    <input type="text" class="form-control" id="usernameFacebook" placeholder="Username">
+                </div>
+            </div>
+            <div class="form-group form-inline">
+                <i class="fab fa-google-plus-square gplus-icon fa-2x"></i>
+                <div class="input-group col">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">https://plus.google.com/</div>
+                    </div>
+                    <input type="text" class="form-control" id="usernameGoogle" placeholder="Username">
+                </div>
+            </div>
+            <hr>
+            @Html.HiddenFor(u => u.Id)
+            @Html.AntiForgeryToken();
+            <button class="btn button-green btn-block" type="submit">Salvar</button>
+        }
+    </div>
 </div>
+
 
 @section scripts
 {
@@ -115,16 +161,16 @@
         $(document).ready(function () {
             function limpa_formulário_cep() {
                 // Limpa valores do formulário de cep.
-                $("#rua").val("");
-                $("#bairro").val("");
-                $("#cidade").val("");
-                $("#uf").val("");
-                $("#complemento").val("");
-                $("#nr-endereco").val("");
+                $("#userAddress").val("");
+                $("#userDistrict").val("");
+                $("#userCity").val("");
+                $("#userUF").val("");
+                $("#userAddressComplement").val("");
+                $("#userAddressNumber").val("");
             }
 
             $("#pesquisar-cep").click(function () {
-                var cep = $("#cep").val();
+                var cep = $("#userCep").val();
 
                 if (cep != "") {
 
@@ -135,19 +181,19 @@
                     if (validacep.test(cep)) {
 
                         //Preenche os campos com "..." enquanto consulta webservice.
-                        $("#rua").val("...");
-                        $("#bairro").val("...");
-                        $("#cidade").val("...");
-                        $("#uf").val("...");
+                        $("#userAddress").val("...");
+                        $("#userDistrict").val("...");
+                        $("#userCity").val("...");
+                        $("#userUF").val("...");
 
                         $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
 
                             if (!("erro" in dados)) {
                                 //Atualiza os campos com os valores da consulta.
-                                $("#rua").val(dados.logradouro);
-                                $("#bairro").val(dados.bairro);
-                                $("#cidade").val(dados.localidade);
-                                $("#uf").val(dados.uf);
+                                $("#userAddress").val(dados.logradouro);
+                                $("#userDistrict").val(dados.bairro);
+                                $("#userCity").val(dados.localidade);
+                                $("#userUF").val(dados.uf);
                             } //end if.
                             else {
                                 //CEP pesquisado não foi encontrado.
